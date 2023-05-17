@@ -1,6 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;800&display=swap');
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+:root{
+  --main-font: 'Mukta', sans-serif;
+  --main-color: #b5d3e9;
+  --dark-color: #272626;
+  --third-color: #0b516f;
+
+}
+
+/*----------- HEADER SECTION -----------*/
+
+.siteName a{
+  font-size: 2.5rem;
+  text-decoration: none;
+  font-family: var(--main-font);
+  color: var(--dark-color);
+  font-weight: 800;
+  margin-left: 2rem;
+}
+
+#tools a{
+  text-decoration: none;
+  font-family: var(--main-font);
+  color: var(--dark-color);
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+#top-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30%;
+}
+
+a:hover, #tools a:hover{
+  color: var(--third-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/*----------- NAVIGATION SECTION -----------*/
+
+nav{
+  background-color: var(--main-color);
+  color: var(--dark-color);
+  padding: .8rem;
+}
+
+nav ul{
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  font-family: var(--main-font);
+  font-weight: 200;
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+
+nav ul li:hover{
+  color: var(--third-color);
+  font-weight: 800;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+/*----------- MAIN SECTION OF THE PAGE -----------*/
+
+h1, h2, h3{
+  font-family: var(--main-font);
+  color: var(--dark-color);
+  font-weight: 800;
+}
+
+h1{
+  font-size: 1.8rem;
+  margin-left: 2rem;
+}
+
+/* ---- Call to action ----*/
+.cta{
+  position: relative;
+}
+
+.ctaBox{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.814);
+  top: -20px;
+  left: 1px;
+  padding: 1rem;
+}
+
+.ctaBox h2{
+  color: var(--dark-color);
+}
+
+.ctaBox ul{
+  color: var(--dark-color);
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.ctaBox button{
+  background-color: var(--main-color);
+  color: var(--dark-color);
+  text-transform: uppercase;
+  border: none;
+  padding: 1rem; 
+  font-family: var(--main-font);
+  font-size: 1.2rem;
+}
+
+button:hover{
+  background-color: var(--third-color);
+  color: white;
+  cursor: pointer;
+}
+
+.cta img{
+  width: 100%;
+}
+
+/* ---- REVIEWS ----*/
+
+.reviews ul{
+  padding: .4rem;
+}
+
+.reviews li{
+padding-bottom: 1rem;
+font-size: 1.3rem;
+}
+
+h3{
+  font-size: 1.8rem;
+}
+
+.reviews{
+  padding: 1rem;
+}
+
+/* ---- UPGRADES ----*/
+
+.upgrades{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+
+
+}
+
+.upgradeSection h3{
+margin-left: 2rem;
+}
+
+
+.upgrade{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upgradeimg{
+  background-color: var(--main-color);
+  margin: 1rem;
+  border: solid 1px var(--third-color);
+  width: 200px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.upgradeimg img{
+  width: 80%;
+  padding: 1rem;
+}
+
+
+.upgrade a{
+  color: var(--third-color);
+  font-size: 1.2rem;
+}
+
+.upgrade a:hover{
+  color: var(--dark-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*----FOOTER----*/
+.copyright{
+  margin-top: 3rem;
+}
+
+@media screen and (min-width: 900px) {
+  html{
+    background-color: var(--main-color);
+    background: url('/images/site/checkerboard.jpg') repeat;
+    background-size: 30%;
+  }
+
+  body{
+    background-color: white;
+    border-radius: 15px;
+    border: solid 4px var(--main-color);
+    margin: 4rem;
+  }
+
+  nav{
+    margin: 1rem;
+  }
+
+  .bottomhalf {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: 100%;
+    gap: 1rem;
+  }
+  
+  .upgrades{
+    grid-row: 1 / span 1;
+  }
+  
+  .reviews {
+    grid-column: 2 / span 1;
+    grid-row: 1;
+  }
+
+  .ctaBox{
+    left: 30px;
+  }
+
+  #top-header{
+    gap: 60%;
+  }
+
+  .cta img{
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .reviews h3{
+    margin-top: 1rem;
+  }
+
+  .reviews li {
+    font-size: 32px;
+  }
+  .ctaBox{
+    top: -20px;
+    left: 5rem;
+  }
+  
+  .ctaBox h2{
+    font-size: 2rem;
+    
+  }
+  
+    .ctaBox ul{
+    text-decoration: none;
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.5rem;
+  }
+    
+    .ctaBox button{
+      font-size:1rem;
+      }
+
+      h1{
+        font-size:2.5rem;
+      }
+
 }

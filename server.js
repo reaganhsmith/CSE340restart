@@ -8,11 +8,26 @@
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
+const expressLayouts = require("express-ejs-layouts");
+const baseController = require("./controllers/baseController")
+
+
+
+/* ***********************
+ * View engine and templates
+ *************************/
+app.set("view engine", "ejs")
+app.use(expressLayouts)
+app.set("layout", "./layouts/layout") // not at views root
+
 
 /* ***********************
  * Routes
  *************************/
 app.use(require("./routes/static"))
+
+// index route
+app.get("/", baseController.buildHome)
 
 /* ***********************
  * Local Server Information
