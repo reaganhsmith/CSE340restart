@@ -87,11 +87,11 @@ Util.buildVehicleInformation = async function(vehicleData){
                  +'" alt="Image of '+ vehicle.inv_make + ' ' 
                  + vehicle.inv_model + ' on CSE Motors" /></div>';
       carInfo += '<div class="CarDetails">';
-      carInfo += '<p>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </p>';
-      carInfo += '<span>' + '<p> Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>' + '</span>';
-      carInfo += '<p> Description: ' + vehicle.inv_description + '</p>';
-      carInfo += '<p> Color: ' + vehicle.inv_color + '</p>';
-      carInfo += '<p> Miles: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>';
+      carInfo += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </h2>';
+      carInfo +=  '<h3> Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</h3>';
+      carInfo += '<p> <strong> Description: </strong>' + vehicle.inv_description + '</p>';
+      carInfo += '<p> <strong> Color: </strong>' + vehicle.inv_color + '</p>';
+      carInfo += '<p> <strong> Miles: </strong>' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>';
       carInfo += '</div>';
     });
     carInfo += '</div>';
