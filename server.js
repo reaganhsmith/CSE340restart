@@ -11,7 +11,6 @@ const app = express()
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController")
 const utilities = require('./utilities/')
-const routes = require('./routes/static')
 
 
 
