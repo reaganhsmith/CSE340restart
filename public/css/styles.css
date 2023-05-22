@@ -90,6 +90,10 @@ h1{
   margin-left: 2rem;
 }
 
+p{
+  font-family: var(--main-font);
+}
+
 /* ---- Call to action ----*/
 .cta{
   position: relative;
@@ -272,6 +276,43 @@ hr{
   border: none;
 }
 
+/* Individual car Section */
+
+.CarSection{
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.CarSection img{
+  width: 100%;
+}
+
+.CarDetails p:nth-of-type(2n){
+  background-color: #dfedf7;
+  
+}
+.CarDetails p{
+padding: 2rem;
+text-align: center;
+}
+
+.CarDetails p:nth-of-type(1){
+  font-size: 32px;
+  padding-top: 0;
+  margin-top: 0;
+  font-weight: 800;
+}
+
+
+.CarDetails span p:nth-of-type(1){
+  font-size: 24px;
+  font-family: var(--main-font);
+  font-weight: 800;
+}
+
 /* MEDIA QUERY SECTION */
 
 @media screen and (min-width: 900px) {
@@ -355,5 +396,26 @@ hr{
       h1{
         font-size:2.5rem;
       }
+  
+  
+  
+      .CarSection{
+      flex-direction: row;
+        align-items: start;
+      justify-content: space-around;
+      }
+  
+  .CarDetails p{
+    padding: 2rem;
+    text-align: left;
+}
+  
+  .CarSection img{
+    width: 120%;
+  }
+  
+  
+  
+
 
 }

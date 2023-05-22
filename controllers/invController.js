@@ -29,15 +29,13 @@ invInv.buildByInventory = async function (req, res, next) {
   const carInfo = await utilities.buildVehicleInformation(vehicleData)
   let nav = await utilities.getNav()
   const VehicleMake = vehicleData[0].inv_make
-  const VehicleModel = vehicleData[1].inv_model
+  const VehicleModel = vehicleData[0].inv_model
   res.render("./inventory/vehicle", {
-    title: VehicleMake + VehicleModel,
+    title: VehicleMake +" "+ VehicleModel,
     nav,
     carInfo,
   })
 }
 
 
-module.exports = {invCont: invCont,
-invInv: invInv
-};
+module.exports = {invCont, invInv};

@@ -76,33 +76,31 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
 * Build the car view HTML
 * ************************************ */
+
+
 Util.buildVehicleInformation = async function(vehicleData){
-  let carInfo;
-  if(vehicleData.length > 0){
-    carInfo ='<div class="CarSection">';
+  let carInfo = "";
+  if(Array.isArray(vehicleData) && vehicleData.length > 0){
+    carInfo += '<div class="CarSection">';
     vehicleData.forEach(vehicle => {
-      carInfo +='<img src="' + vehicle.inv_image
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" />'
+      carInfo += '<div><img src="' + vehicle.inv_image
+                 +'" alt="Image of '+ vehicle.inv_make + ' ' 
+                 + vehicle.inv_model + ' on CSE Motors" /></div>';
       carInfo += '<div class="CarDetails">';
-      carInfo += '<p>$'
-      + vehicle.inv_make + vehicle.inv_model + '</p>';
-      carInfo += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>';
-      carInfo += '<p>$'
-      + vehicle.inv_description + '</p>';
-      carInfo += '<p>$'
-      + vehicle.inv_color + '</p>';
-      carInfo += '<p>$'
-      + vehicle.inv_miles + '</p>';
+      carInfo += '<p>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </p>';
+      carInfo += '<span>' + '<p> Price: $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>' + '</span>';
+      carInfo += '<p> Description: ' + vehicle.inv_description + '</p>';
+      carInfo += '<p> Color: ' + vehicle.inv_color + '</p>';
+      carInfo += '<p> Miles: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>';
       carInfo += '</div>';
     });
     carInfo += '</div>';
   } else { 
-    carInfo = '<p class="notice"> Sorry, There is no information about this vehicle. </p>';
+    carInfo = '<p class="notice"> Sorry, there is no information about this vehicle. </p>';
   }
   return carInfo;
 }
+
 
 
 
