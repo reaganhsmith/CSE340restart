@@ -11,7 +11,9 @@ const app = express()
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController")
 const utilities = require('./utilities/')
-
+const invController = require("./controllers/invController")
+const inventoryRoutes = require("./routes/inventoryRoute")
+const routes = require("./routes/static")
 
 
 
@@ -26,16 +28,13 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
-app.use(require("./routes/static"))
+app.use(utilities.handleErrors(routes))
 
 // index route
 app.get("/",utilities.handleErrors(baseController.buildHome))
 
-
-
-
 // Inventory routes
-app.use("/inv", require("./routes/inventoryRoute"))
+app.use("/inv", utilities.handleErrors(inventoryRoutes))
 
 
 
@@ -47,6 +46,8 @@ app.use(async (req, res, next) => {
 
 
 
+
+
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
@@ -54,13 +55,14 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  if(err.status == 404 || err.status == 500){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
   })
 })
+
 
 
 /* ***********************
