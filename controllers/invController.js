@@ -3,6 +3,7 @@ const utilities = require("../utilities/")
 
 const invCont = {}
 const invInv = {}
+const createError = {}
 
 /* ***************************
  *  Build inventory by classification view
