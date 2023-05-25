@@ -38,7 +38,13 @@ invInv.buildByInventory = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build function that throws an error
+ * ************************** */
+createError.generateError = async function (req, res, next) {
+  throw new Error('Intentional error!');
+};
 
 
 
-module.exports = {invCont, invInv};
+module.exports = {invCont, invInv, createError};

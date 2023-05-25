@@ -6,6 +6,7 @@ const invController = require("../controllers/invController")
 // Accessing the objects
 const invCont = invController.invCont;
 const invInv = invController.invInv;
+const createError = invController.createError;
 
 
 // Route to build inventory by classification view
@@ -15,7 +16,5 @@ router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClas
 router.get("/detail/:inventoryId",utilities.handleErrors(invInv.buildByInventory));
 
 
-
 // Export both routers
 module.exports = router;
-
