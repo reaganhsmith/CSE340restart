@@ -17,6 +17,7 @@ const invController = require("./controllers/invController")
 const inventoryRoutes = require("./routes/inventoryRoute")
 const accountRoutes = require("./routes/accountRoute")
 const routes = require("./routes/static")
+const bodyParser = require("body-parser")
 
 
 /* ***********************
@@ -39,6 +40,11 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+
 
 /* ***********************
  * View engine and templates
@@ -63,8 +69,7 @@ app.use("/inv", utilities.handleErrors(inventoryRoutes))
 app.get('/trigger-error', utilities.handleErrors(invController.createError.generateError));
 
 // Route for accounts page
-app.use("/", utilities.handleErrors(accountRoutes))
-
+app.use("/account", utilities.handleErrors(accountRoutes))
 
 
 // File Not Found Route - must be last route in list

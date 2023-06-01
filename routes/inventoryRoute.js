@@ -16,5 +16,6 @@ router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClas
 router.get("/detail/:inventoryId",utilities.handleErrors(invInv.buildByInventory));
 
 
+
 // Export both routers
 module.exports = router;
