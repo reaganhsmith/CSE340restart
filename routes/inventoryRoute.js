@@ -3,10 +3,10 @@ const router = express.Router()
 const utilities = require('../utilities/')
 
 const invController = require("../controllers/invController")
-// Accessing the objects
+
+// Accessing the build
 const invCont = invController.invCont;
 const invInv = invController.invInv;
-const createError = invController.createError;
 
 
 // Route to build inventory by classification view
