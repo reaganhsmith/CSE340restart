@@ -38,7 +38,7 @@ app.use("/inv", utilities.handleErrors(inventoryRoutes))
 
 
 //Route for my 500 page
-app.get('/tigger-error', utilities.handleErrors(invController.createError.generateError));
+app.get('/trigger-error', utilities.handleErrors(invController.createError.generateError));
 
 
 
