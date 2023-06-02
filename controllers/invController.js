@@ -70,9 +70,12 @@ buildClass.newClass = async function (req, res, next) {
  * ************************** */
 buildInv.newInv = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let form = await utilities.addInventoryForm()
   res.render("./inventory/add-inventory", {
     title: "Add New Inventory",
     nav,
+    errors: null,
+    form,
   })
 }
 

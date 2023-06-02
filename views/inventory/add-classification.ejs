@@ -4,3 +4,17 @@
     <% } else {
       res.redirect('/')
     } %>
+
+<!-- Messages or error mesages  -->
+<%- messages() %>
+
+<!-- forms to add a new classification -->
+
+<form id="addClassForm">
+  <span> Field is Required</span> 
+  <label for="name">Classification Name</label>
+  <span> Name must be alphabetical characters only!</span> 
+  <input type="name" name="classification_name" required placeholder="Enter a Classification Name">
+
+  <button type="submit" value="newClass"> Submit</button>
+</form>
