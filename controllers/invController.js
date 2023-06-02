@@ -4,6 +4,7 @@ const utilities = require("../utilities/")
 const invCont = {}
 const invInv = {}
 const createError = {}
+const managment = {}
 
 /* ***************************
  *  Build inventory by classification view
@@ -46,5 +47,17 @@ createError.generateError = async function (req, res, next) {
 };
 
 
+/* ***************************
+ *  Adds to the managment page
+ * ************************** */
+managment.addCar = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/managment", {
+    title: "Manage Cars",
+    nav,
+  })
+}
 
-module.exports = {invCont, invInv, createError};
+
+
+module.exports = {invCont, invInv, createError, managment};
