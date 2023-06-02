@@ -5,6 +5,8 @@ const invCont = {}
 const invInv = {}
 const createError = {}
 const managment = {}
+const buildClass = {}
+const buildInv = {}
 
 /* ***************************
  *  Build inventory by classification view
@@ -39,13 +41,6 @@ invInv.buildByInventory = async function (req, res, next) {
   })
 }
 
-/* ***************************
- *  Build function that throws an error
- * ************************** */
-createError.generateError = async function (req, res, next) {
-  throw new Error('Intentional error!');
-};
-
 
 /* ***************************
  *  Adds to the managment page
@@ -59,5 +54,39 @@ managment.addCar = async function (req, res, next) {
 }
 
 
+/* ***************************
+ *  Build for add-classification
+ * ************************** */
+buildClass.newClass = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+  })
+}
 
-module.exports = {invCont, invInv, createError, managment};
+/* ***************************
+ *  Build for add-classification
+ * ************************** */
+buildInv.newInv = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+  })
+}
+
+
+/* ***************************
+ *  Build function that throws an error
+ * ************************** */
+createError.generateError = async function (req, res, next) {
+  throw new Error('Intentional error!');
+};
+
+module.exports = {invCont, 
+  invInv, 
+  createError, 
+  managment,
+  buildClass,
+  buildInv};

@@ -16,7 +16,14 @@ router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClas
 // Route to build inventroy by inventory ID
 router.get("/detail/:inventoryId",utilities.handleErrors(invInv.buildByInventory));
 
-router.get("/inv", managment.addCar)
+//Route to add a classification or inventory
+router.get("/", utilities.handleErrors(managment.addCar))
+
+//Route to add a classification
+router.get("/add-classification", utilities.handleErrors(invController.buildClass.newClass))
+
+//route to add inventory
+router.get("/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
 
 // Export both routers
 module.exports = router;
