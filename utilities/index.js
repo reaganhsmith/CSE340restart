@@ -94,7 +94,7 @@ Util.buildVehicleInformation = async function(vehicleData){
 * ************************************ */
 Util.addInventoryForm = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  let form = '<select id="addClassForm">'
+  let form = '<select id="addClassForm" name="classification_name">'
   form += '<option disabled selected hidden> Please select a classification </option>'
   data.rows.forEach((row) => {
     form += '<option value=" ' + row.classification_name + '">'

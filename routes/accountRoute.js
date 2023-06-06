@@ -15,7 +15,7 @@ router.get("/login", utilities.handleErrors(buildLogin))
 router.get("/registration", utilities.handleErrors(accountCont.buildRegister))
 
 //Route for registration 
-router.post('/register', 
+router.post('/registration', 
 regValidate.registationRules(), 
 regValidate.checkRegData,
 utilities.handleErrors(accountCont.registerAccount))

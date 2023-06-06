@@ -26,10 +26,25 @@ async function checkExistingEmail(account_email){
   }
 }
 
+/* **********************
+ *   Check for existing password
+ * ********************* */
+async function checkPassword(account_password){
+  try {
+    const sql = "SELECT * FROM account WHERE account_password = $1"
+    const password = await pool.query(sql, [account_password])
+    return password.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+
 
 
   // Exporting all functions together
 module.exports = {
     registerAccount,
-    checkExistingEmail
+    checkExistingEmail,
+    checkPassword,
   };

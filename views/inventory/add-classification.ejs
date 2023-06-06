@@ -8,9 +8,18 @@
 <!-- Messages or error mesages  -->
 <%- messages() %>
 
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <!-- forms to add a new classification -->
 
-<form id="addClassForm">
+<form id="addClassForm" action="/inv/add-inventory" method="post">
   <span> Field is Required</span> 
   <label for="name">Classification Name</label>
   <span> Name must be alphabetical characters only!</span> 

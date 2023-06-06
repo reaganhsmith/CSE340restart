@@ -7,6 +7,7 @@ const createError = {}
 const managment = {}
 const buildClass = {}
 const buildInv = {}
+const addInv = {}
 
 /* ***************************
  *  Build inventory by classification view
@@ -62,6 +63,7 @@ buildClass.newClass = async function (req, res, next) {
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
+    errors: null,
   })
 }
 
@@ -81,15 +83,94 @@ buildInv.newInv = async function (req, res, next) {
 
 
 /* ***************************
+ *  Adds new inventory to the database 
+ * ************************** */
+addInv.addInventory = async function(req, res, next){
+  let nav = await utilities.getNav()
+  const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
+
+  const regResults = await invModel.addinventory(
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    2
+    
+  )
+
+  if(regResults){
+    req.flash(
+      "notice",
+      `Congratulations, you added a ${inv_model} ${inv_model} to the inventory`
+    )
+    res.status(201).render("inv/add-inventory",{
+      title: "Add New Inventory",
+      nav,
+      errors: null
+    })
+  } else{
+    req.flash("notice", "sorry unable to add car to inventory")
+    res.status(501).render("inv/add-inventory",{
+      title: "Add New Inventory",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+
+/* ****************************************
+*  Process new classifcation 
+* *************************************** */
+async function addClass(req, res){
+  let nav = await utilities.getNav()
+  const {classification_name} = req.body
+
+  const regResult = await invModel.addClassification(
+    classification_name
+  )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you added ${account_classification} to your classifications.`
+    )
+    res.status(201).render("inv/add-inventory", {
+      title: "Add New Inventory",
+      nav
+    })
+  } else {
+    req.flash("notice", "Sorry, that did not work, please try again.")
+    res.status(501).render("account/add-classification", {
+      title: "Add New Classification",
+      nav
+    })
+  }
+}
+
+
+
+/* ***************************
  *  Build function that throws an error
  * ************************** */
 createError.generateError = async function (req, res, next) {
   throw new Error('Intentional error!');
 };
 
+
+
+
+
 module.exports = {invCont, 
   invInv, 
   createError, 
   managment,
   buildClass,
-  buildInv};
+  buildInv, 
+  addInv,
+  addClass};
