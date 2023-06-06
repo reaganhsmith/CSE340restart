@@ -7,8 +7,6 @@ const createError = {}
 const managment = {}
 const buildClass = {}
 const buildInv = {}
-const addInv = {}
-
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
@@ -85,11 +83,11 @@ buildInv.newInv = async function (req, res, next) {
 /* ***************************
  *  Adds new inventory to the database 
  * ************************** */
-addInv.addInventory = async function(req, res, next){
+async function addInv(req, res) {
   let nav = await utilities.getNav()
-  const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
+  const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
 
-  const regResults = await invModel.addinventory(
+  const regResults = await invModel.addInv(
     inv_make,
     inv_model,
     inv_description,
@@ -99,7 +97,7 @@ addInv.addInventory = async function(req, res, next){
     inv_year, 
     inv_miles, 
     inv_color,
-    2
+    classification_id
     
   )
 
@@ -127,18 +125,18 @@ addInv.addInventory = async function(req, res, next){
 /* ****************************************
 *  Process new classifcation 
 * *************************************** */
-async function addClass(req, res){
+async function addClass(req, res) {
   let nav = await utilities.getNav()
   const {classification_name} = req.body
 
-  const regResult = await invModel.addClassification(
+  const regResult = await invModel.addClass(
     classification_name
   )
 
   if (regResult) {
     req.flash(
       "notice",
-      `Congratulations, you added ${account_classification} to your classifications.`
+      `Congratulations, you added ${classification_name} to your classifications.`
     )
     res.status(201).render("inv/add-inventory", {
       title: "Add New Inventory",
