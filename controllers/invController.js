@@ -84,10 +84,12 @@ buildInv.newInv = async function (req, res, next) {
  *  Adds new inventory to the database 
  * ************************** */
 async function addInv(req, res) {
+  let form = await utilities.addInventoryForm()
   let nav = await utilities.getNav()
-  const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
+  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, } = req.body
 
   const regResults = await invModel.addInv(
+    classification_id,
     inv_make,
     inv_model,
     inv_description,
@@ -96,27 +98,29 @@ async function addInv(req, res) {
     inv_price, 
     inv_year, 
     inv_miles, 
-    inv_color,
-    classification_id
+    inv_color
+    
     
   )
 
   if(regResults){
     req.flash(
       "notice",
-      `Congratulations, you added a ${inv_model} ${inv_model} to the inventory`
+      `Congratulations, you added a ${inv_make} ${inv_model} to the inventory`
     )
-    res.status(201).render("inv/add-inventory",{
-      title: "Add New Inventory",
-      nav,
-      errors: null
-    })
-  } else{
-    req.flash("notice", "sorry unable to add car to inventory")
-    res.status(501).render("inv/add-inventory",{
+    res.status(201).render("inventory/add-inventory",{
       title: "Add New Inventory",
       nav,
       errors: null,
+      form
+    })
+  } else{
+    req.flash("notice", "sorry unable to add car to inventory")
+    res.status(501).render("inventory/add-inventory",{
+      title: "Add New Inventory",
+      nav,
+      errors: null,
+      form
     })
   }
 }
@@ -127,6 +131,7 @@ async function addInv(req, res) {
 * *************************************** */
 async function addClass(req, res) {
   let nav = await utilities.getNav()
+  let form = await utilities.addInventoryForm()
   const {classification_name} = req.body
 
   const regResult = await invModel.addClass(
@@ -138,15 +143,18 @@ async function addClass(req, res) {
       "notice",
       `Congratulations, you added ${classification_name} to your classifications.`
     )
-    res.status(201).render("inv/add-inventory", {
+    res.status(201).render("inventory/add-inventory", {
       title: "Add New Inventory",
-      nav
+      nav,
+      form,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, that did not work, please try again.")
-    res.status(501).render("account/add-classification", {
+    res.status(501).render("inventory/add-classification", {
       title: "Add New Classification",
-      nav
+      nav,
+      errors: null,
     })
   }
 }

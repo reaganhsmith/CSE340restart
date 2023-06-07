@@ -43,7 +43,7 @@ async function registerAccount(req, res) {
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
     req.flash("notice", 'Sorry, there was an error processing the registration.')
-    res.status(500).render("account/register", {
+    res.status(500).render("account/registration", {
       title: "Registration",
       nav,
       errors: null,
@@ -65,10 +65,11 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
-    res.status(501).render("account/register", {
+    res.status(501).render("account/registration", {
       title: "Registration",
       nav,
       errors: null,
