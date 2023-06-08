@@ -49,6 +49,7 @@ managment.addCar = async function (req, res, next) {
   res.render("./inventory/managment", {
     title: "Manage Cars",
     nav,
+    message: null,
     errors: null,
   })
 }
@@ -63,6 +64,7 @@ buildClass.newClass = async function (req, res, next) {
     title: "Add New Classification",
     nav,
     errors: null,
+    message: null,
   })
 }
 
@@ -111,7 +113,7 @@ async function addInv(req, res) {
       title: "Add New Inventory",
       nav,
       errors: null,
-      form
+
     })
   } else{
     req.flash("notice", "sorry unable to add car to inventory")
@@ -130,7 +132,6 @@ async function addInv(req, res) {
 * *************************************** */
 async function addClass(req, res) {
   let nav = await utilities.getNav()
-  let form = await utilities.addInventoryForm()
   const {classification_name} = req.body
 
   const regResult = await invModel.addClass(
