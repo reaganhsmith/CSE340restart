@@ -82,7 +82,7 @@ Util.buildVehicleInformation = async function(vehicleData){
     });
     carInfo += '</div>';
   } else { 
-    carInfo = '<p class="notice"> Sorry, there is no information about this vehicle. </p>';
+    carInfo += '<p class="notice"> Sorry, there is no information about this vehicle. </p>';
   }
   return carInfo;
 }
@@ -94,8 +94,8 @@ Util.buildVehicleInformation = async function(vehicleData){
 * ************************************ */
 Util.addInventoryForm = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  let form = '<select id="addClassForm" name="classification_id">'
-  form += '<option disabled selected hidden> Please select a classification </option>'
+  let form = '<select id="addClassForm" name="classification_id" required >'
+  // form += '<option disabled selected hidden> Please select a classification </option>'
   data.rows.forEach((row) => {
     form += '<option value="'+row.classification_id + '">'
     + row.classification_name + '</option>'

@@ -373,9 +373,17 @@ form p a{
 form p a:hover{
   font-size: 1.4rem;
 }
+
+
+input:required:invalid, input:focus:invalid {
+  border: solid 3px rgb(181, 90, 90);
+ }
+ 
+ input:required:valid {
+  border: solid 3px rgb(170, 221, 170);
+ }
+
 /* MEDIA QUERY SECTION */
-
-
 
 @media screen and (min-width: 900px) {
   html{
