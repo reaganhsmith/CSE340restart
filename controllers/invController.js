@@ -89,10 +89,9 @@ buildInv.newInv = async function (req, res, next) {
 async function addInv(req, res) {
   let form = await utilities.addInventoryForm()
   let nav = await utilities.getNav()
-  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
 
+  const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
   const regResults = await invModel.addInv(
-    classification_id,
     inv_make,
     inv_model,
     inv_description,
@@ -101,7 +100,8 @@ async function addInv(req, res) {
     inv_price, 
     inv_year, 
     inv_miles, 
-    inv_color
+    inv_color,
+    classification_id
   )
 
   if(regResults){
@@ -109,11 +109,11 @@ async function addInv(req, res) {
       "notice",
       `Congratulations, you added a ${inv_make} ${inv_model} to the inventory`
     )
-    res.status(201).render("inventory/managment",{
+    res.status(201).render("inventory/add-inventory",{
       title: "Add New Inventory",
       nav,
       errors: null,
-
+      form,
     })
   } else{
     req.flash("notice", "sorry unable to add car to inventory")

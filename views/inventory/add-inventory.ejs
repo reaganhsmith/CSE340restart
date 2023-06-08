@@ -20,6 +20,7 @@
 <!-- forms to add a new inventory -->
 
 <form id="addClassForm" action="/inv/add-inventory" method="post">
+  <label for="classification">Classification:</label>
   <%- form %>
 
     <label for="make">Make:</label>
@@ -50,6 +51,6 @@
     <label for="color">Color:</label>
     <input type="text"id="color" name="inv_color" required>
 
-    <button type="submit" value="Login"> Submit</button>
+    <button type="submit" value="Add Vehicle"> Submit</button>
 
 </form>

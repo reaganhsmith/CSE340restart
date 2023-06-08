@@ -66,16 +66,17 @@ validate.loginRules = () => {
             }
         }),
 
-    // password is required
-    body("account_password")
-      .trim()
-      // .withMessage("Invalid Password. please try again")
-      .custom(async (account_password) => {
-        const passwordExists = await accountModel.checkPassword(account_password)
-        if (!passwordExists){
-        throw new Error("incorrect password please try again.")
-        }
-    }),
+        body("account_password")
+        .trim()
+        .isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+
+        .withMessage("password is invalid and does not meet the requirements.")
   ]
 }
 

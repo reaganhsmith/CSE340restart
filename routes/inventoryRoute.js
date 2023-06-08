@@ -30,7 +30,7 @@ router.post("/add-inventory",
  utilities.handleErrors(invController.addInv))
 
 //router post
-router.post("/add-classification",
+router.post("/",
 utilities.handleErrors(invController.addClass))
 
 // Export both routers
