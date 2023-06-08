@@ -23,7 +23,7 @@
   <span> Field is Required</span> 
   <label for="name">Classification Name</label>
   <span> Name must be alphabetical characters only and no spaces!</span> 
-  <input type="text" name="classification_name" pattern="[A-Za-z]+" required placeholder="Enter a Classification Name">
+  <input type="text" name="classification_name" pattern="[A-Za-z]+" required placeholder="Enter a Classification Name" value="<%= locals.classification_name %>">
 
   <button type="submit" value="newClass"> Submit</button>
 </form>

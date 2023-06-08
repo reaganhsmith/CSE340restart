@@ -3,6 +3,7 @@ const router = express.Router()
 const utilities = require('../utilities/')
 
 const invController = require("../controllers/invController")
+const invValidate = require("../utilities/inventory-validation") 
 
 // Accessing the build
 const invCont = invController.invCont;
@@ -27,10 +28,14 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildInv.newIn
 
 //router post
 router.post("/add-inventory",
+invValidate.invRules(),
+invValidate.checkInvData,
  utilities.handleErrors(invController.addInv))
 
 //router post
 router.post("/",
+invValidate.classRules(),
+invValidate.checkClassData,
 utilities.handleErrors(invController.addClass))
 
 // Export both routers

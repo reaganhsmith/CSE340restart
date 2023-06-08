@@ -70,11 +70,28 @@ async function addClass(classification_name){
 }
 
 
+/* **********************
+ *   Check for existing classification
+ * ********************* */
+async function checkClass(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const className = await pool.query(sql, [classification_name])
+    return className.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+
+
+
 // Exporting all functions together
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getInventoryByIdentityId,
   addInv,
-  addClass
+  addClass,
+  checkClass
 };

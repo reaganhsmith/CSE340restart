@@ -48,9 +48,9 @@ managment.addCar = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/managment", {
     title: "Manage Cars",
-    nav,
     message: null,
     errors: null,
+    nav,
   })
 }
 
@@ -62,9 +62,9 @@ buildClass.newClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
-    nav,
     errors: null,
     message: null,
+    nav,
   })
 }
 
@@ -145,19 +145,18 @@ async function addClass(req, res) {
     )
     res.status(201).render("inventory/managment", {
       title: "Add New Inventory",
-      nav,
       errors: null,
+      nav,
     })
   } else {
     req.flash("notice", "Sorry, that did not work, please try again.")
     res.status(501).render("inventory/add-classification", {
       title: "Add New Classification",
-      nav,
       errors: null,
+      nav,
     })
   }
 }
-
 
 
 /* ***************************
