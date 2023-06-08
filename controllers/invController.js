@@ -49,6 +49,7 @@ managment.addCar = async function (req, res, next) {
   res.render("./inventory/managment", {
     title: "Manage Cars",
     nav,
+    errors: null,
   })
 }
 
@@ -86,7 +87,7 @@ buildInv.newInv = async function (req, res, next) {
 async function addInv(req, res) {
   let form = await utilities.addInventoryForm()
   let nav = await utilities.getNav()
-  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, } = req.body
+  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
 
   const regResults = await invModel.addInv(
     classification_id,
@@ -99,8 +100,6 @@ async function addInv(req, res) {
     inv_year, 
     inv_miles, 
     inv_color
-    
-    
   )
 
   if(regResults){
@@ -108,7 +107,7 @@ async function addInv(req, res) {
       "notice",
       `Congratulations, you added a ${inv_make} ${inv_model} to the inventory`
     )
-    res.status(201).render("inventory/add-inventory",{
+    res.status(201).render("inventory/managment",{
       title: "Add New Inventory",
       nav,
       errors: null,
@@ -143,10 +142,9 @@ async function addClass(req, res) {
       "notice",
       `Congratulations, you added ${classification_name} to your classifications.`
     )
-    res.status(201).render("inventory/add-inventory", {
+    res.status(201).render("inventory/managment", {
       title: "Add New Inventory",
       nav,
-      form,
       errors: null,
     })
   } else {

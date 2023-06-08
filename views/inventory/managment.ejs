@@ -5,5 +5,18 @@
       res.redirect('/')
     } %>
 
+
+    <!-- Messages or error mesages  -->
+<%- messages() %>
+
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <a href="./inv/add-classification"> Create New Classification </a>
 <a href="./inv/add-inventory"> Create New Inventory</a>

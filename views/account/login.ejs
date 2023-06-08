@@ -19,7 +19,7 @@
 
     <form id="loginForm" action="/account/login" method="post" >
         <label for="email">Email:</label>
-        <input type="email" name="account_email" required placeholder="Enter a valid email address">
+        <input type="email" name="account_email" required placeholder="Enter a valid email address" <%= locals.account_lastname %>">
         
         <label for="password">Password:</label>
         <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
