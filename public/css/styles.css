@@ -383,6 +383,36 @@ input:required:invalid, input:focus:invalid {
   border: solid 3px rgb(170, 221, 170);
  }
 
+
+  /* MANAGER PAGE */
+  .manage{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    gap: .5rem;
+    color: var(--dark-color);
+    
+    
+   }
+
+   .manage a{
+    background-color: var(--main-color);
+    padding: 2rem;
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 20px;
+   }
+
+   .manage a:hover{
+    color: white;
+   }
+
+   .manage a:visited {
+    color: var(--dark-color);
+    text-decoration: double;
+   }
+  
 /* MEDIA QUERY SECTION */
 
 @media screen and (min-width: 900px) {
@@ -502,5 +532,10 @@ input:required:invalid, input:focus:invalid {
 
   form{
     width: 60%;
+  }
+
+  .manage a{
+    width: 50%;
+
   }
 }
