@@ -412,6 +412,12 @@ input:required:invalid, input:focus:invalid {
     color: var(--dark-color);
     text-decoration: double;
    }
+
+
+
+span{
+  font-size: 1rem;
+}
   
 /* MEDIA QUERY SECTION */
 
