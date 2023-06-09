@@ -21,9 +21,9 @@
 
 <form id="addClassForm" action="/inv" method="post">
   <span> Field is Required</span> 
-  <label for="name">Classification Name</label>
+  <label for="classification_name">Classification Name</label>
   <span> Name must be alphabetical characters only and no spaces!</span> 
-  <input type="text" name="classification_name" pattern="[A-Za-z]+" required placeholder="Enter a Classification Name" value="<%= locals.classification_name %>">
+  <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required placeholder="Enter a Classification Name" value="<%= locals.classification_name %>">
 
   <button type="submit" value="newClass"> Submit</button>
 </form>

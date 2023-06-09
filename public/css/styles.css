@@ -353,7 +353,7 @@ form button{
   padding: 1rem;
   font-size: 1.3rem;
   border: none;
-  color: (--dark-color);
+  color: var(--dark-color);
   background-color: #F0F0F0;
 }
 
