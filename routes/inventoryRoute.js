@@ -22,9 +22,11 @@ router.get("/", utilities.handleErrors(managment.addCar))
 
 //Route to add a classification
 router.get("/inv/add-classification", utilities.handleErrors(invController.buildClass.newClass))
+router.get("/add-classification", utilities.handleErrors(invController.buildClass.newClass))
 
 //route to add inventory
 router.get("/inv/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
+router.get("/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
 
 //router post
 router.post("/add-inventory",
