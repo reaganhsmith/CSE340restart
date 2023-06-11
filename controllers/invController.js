@@ -7,6 +7,8 @@ const createError = {}
 const managment = {}
 const buildClass = {}
 const buildInv = {}
+const addInv = {}
+const addClass = {}
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
@@ -86,7 +88,7 @@ buildInv.newInv = async function (req, res, next) {
 /* ***************************
  *  Adds new inventory to the database 
  * ************************** */
-async function addInv(req, res) {
+addInv.newInv = async function (req, res, next) {
   let form = await utilities.addInventoryForm()
   let nav = await utilities.getNav()
 
@@ -130,7 +132,7 @@ async function addInv(req, res) {
 /* ****************************************
 *  Process new classifcation 
 * *************************************** */
-async function addClass(req, res) {
+addClass.addNewClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   const {classification_name} = req.body
 

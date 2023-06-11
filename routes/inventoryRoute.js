@@ -3,7 +3,7 @@ const router = express.Router()
 const utilities = require('../utilities/')
 
 const invController = require("../controllers/invController")
-const invValidate = require("../utilities/inventory-validation") 
+const invValidate = require("../utilities/inventory-validation");
 
 // Accessing the build
 const invCont = invController.invCont;
@@ -21,22 +21,22 @@ router.get("/detail/:inventoryId",utilities.handleErrors(invInv.buildByInventory
 router.get("/", utilities.handleErrors(managment.addCar))
 
 //Route to add a classification
-router.get("/add-classification", utilities.handleErrors(invController.buildClass.newClass))
+router.get("/inv/add-classification", utilities.handleErrors(invController.buildClass.newClass))
 
 //route to add inventory
-router.get("/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
+router.get("/inv/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
 
 //router post
 router.post("/add-inventory",
 invValidate.invRules(),
 invValidate.checkInvData,
- utilities.handleErrors(invController.addInv))
+ utilities.handleErrors(invController.addInv.newInv))
 
 //router post
 router.post("/",
 invValidate.classRules(),
 invValidate.checkClassData,
-utilities.handleErrors(invController.addClass))
+utilities.handleErrors(invController.addClass.addNewClass))
 
 // Export both routers
 module.exports = router;
