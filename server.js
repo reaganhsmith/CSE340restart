@@ -18,6 +18,7 @@ const inventoryRoutes = require("./routes/inventoryRoute")
 const accountRoutes = require("./routes/accountRoute")
 const routes = require("./routes/static")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -43,8 +44,8 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
-
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View engine and templates

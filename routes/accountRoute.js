@@ -14,16 +14,20 @@ router.get("/login", utilities.handleErrors(buildLogin))
 //Route to build registration page 
 router.get("/registration", utilities.handleErrors(accountCont.buildRegister))
 
+//Route to say they have logged in successfully  
+router.get("/", utilities.handleErrors(accountCont.loggedIn))
+
 //Route for registration 
 router.post('/registration', 
 regValidate.registationRules(), 
 regValidate.checkRegData,
 utilities.handleErrors(accountCont.registerAccount))
 
-router.post('/login',
+router.post(
+  '/login',
 regValidate.loginRules(),
 regValidate.checkRegLogin,
-utilities.handleErrors(accountCont.buildLogin))
+utilities.handleErrors(accountCont.accountLogin))
 
 // Process the login attempt
 router.post(
