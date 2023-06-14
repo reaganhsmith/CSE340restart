@@ -15,7 +15,7 @@ router.get("/login", utilities.handleErrors(buildLogin))
 router.get("/registration", utilities.handleErrors(accountCont.buildRegister))
 
 //Route to say they have logged in successfully  
-router.get("/", utilities.handleErrors(accountCont.loggedIn))
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountCont.loggedIn))
 
 //Route for registration 
 router.post('/registration', 

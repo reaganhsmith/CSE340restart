@@ -40,5 +40,8 @@ invValidate.classRules(),
 invValidate.checkClassData,
 utilities.handleErrors(invController.addClass.addNewClass))
 
+//New route that works with URL in javascript (WEEK 9)
+router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.getInventoryJSON))
+
 // Export both routers
 module.exports = router;

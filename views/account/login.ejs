@@ -31,18 +31,5 @@
     </form>
 
 
-    <script>
-      const pswdBtn = document.querySelector("#pswdBtnLogin");
-      pswdBtn.addEventListener("click", function() {
-      const pswdInput = document.getElementById("loginPassword");
-       const type = pswdInput.getAttribute("type");
-      if (type == "password") {
-          pswdInput.setAttribute("type", "text");
-          pswdBtn.innerHTML = "Hide Password";
-    } else {
-          pswdInput.setAttribute("type", "password");
-          pswdBtn.innerHTML = "Show Password";
-    }
-  });
-  </script>
+  <script src="../../js/script.js"></script>
   
