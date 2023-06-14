@@ -46,5 +46,10 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.ge
 // New Route for edit inventory
 router.get("/edit/:inv_id", utilities.handleErrors(invCont.editInv))
 
+router.post("/update/",
+invValidate.invRules(),
+invValidate.checkUpdateData,
+utilities.handleErrors(invCont.updateInventory))
+
 // Export both routers
 module.exports = router;

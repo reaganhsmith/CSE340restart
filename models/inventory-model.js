@@ -84,7 +84,45 @@ async function checkClass(classification_name){
 }
 
 
+/* *****************************
+*   Register new inventory
+* *************************** */
+async function updateInventory(
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id,
+  inv_id
+  ){
+  try{
+    const sql = 
+      "UPDATE public.inventory  SET inv_make = $1, SET inv_model = $2, SET inv_description = $3, SET inv_image = $4, SET inv_thumbnail = $5, SET inv_price = $6, SET inv_year = $7, SET inv_miles = $8, SET inv_color = $9, SET classification_id = $10 WHERE inv_id = $11 RETURNING *"
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data
 
+  }
+  catch(error){
+    console.error("model error: " + error)
+  }
+}
 
 // Exporting all functions together
 module.exports = {
@@ -93,5 +131,6 @@ module.exports = {
   getInventoryByIdentityId,
   addInv,
   addClass,
-  checkClass
+  checkClass,
+  updateInventory
 };
