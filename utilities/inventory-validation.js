@@ -167,9 +167,9 @@ validate.checkInvData = async (req, res, next) => {
  * ***************************** */
 validate.checkUpdateData = async (req, res, next) => {
     const inv_id = parseInt(req.params.inv_id)
-    const {inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
+    const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color} = req.body
     let errors = []
-    let form = await utilities.addInventoryForm()
+    let form = await utilities.addInventoryForm(classification_id)
 
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -182,7 +182,8 @@ validate.checkUpdateData = async (req, res, next) => {
         inv_make,
         inv_model,
         inv_description,
-        inv_image, inv_thumbnail,
+        inv_image,
+        inv_thumbnail,
         inv_price,
         inv_year,
         inv_miles,

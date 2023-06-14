@@ -49,7 +49,7 @@ router.get("/edit/:inv_id", utilities.handleErrors(invCont.editInv))
 router.post("/update/",
 invValidate.invRules(),
 invValidate.checkUpdateData,
-utilities.handleErrors(invCont.updateInventory))
+utilities.handleErrors(invController.updateInv.updateInventory))
 
 // Export both routers
 module.exports = router;
