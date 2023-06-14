@@ -9,6 +9,7 @@ const buildClass = {}
 const buildInv = {}
 const addInv = {}
 const addClass = {}
+const editInv = {}
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
@@ -179,6 +180,34 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.editInv = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryByIdentityId(inv_id)
+  const classificationSelect = await utilities.addInventoryForm(itemData[0].classification_id)
+  const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
+  res.render("./inventory/edit-inv", {
+    title: "Edit " + itemName,
+    nav,
+    classificationSelect,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id
+  })
+}
+
 
 /* ***************************
  *  Build function that throws an error
@@ -196,4 +225,5 @@ module.exports = {invCont,
   buildClass,
   buildInv, 
   addInv,
-  addClass};
+  addClass,
+editInv};
