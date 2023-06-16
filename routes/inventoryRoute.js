@@ -51,5 +51,12 @@ invValidate.invRules(),
 invValidate.checkUpdateData,
 utilities.handleErrors(invController.updateInv.updateInventory))
 
+// New Route to delete an inventory item
+router.get("/delete/:inv_id", utilities.handleErrors(invCont.deleteInv))
+
+router.post("/delete/",
+utilities.handleErrors(invCont.deleteInventory))
+
+
 // Export both routers
 module.exports = router;

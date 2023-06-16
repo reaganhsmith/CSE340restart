@@ -244,7 +244,7 @@ updateInv.updateInventory = async function (req, res, next) {
   )
 
   if (updateResult) {
-    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    const itemName = inv_make + " " + inv_model
     req.flash("notice", `The ${itemName} was successfully updated.`)
     res.redirect("/inv/")
   } else {
@@ -271,6 +271,70 @@ updateInv.updateInventory = async function (req, res, next) {
   }
 }
 
+
+/* ***************************
+ *  Build delete inventory view
+ * ************************** */
+invCont.deleteInv = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+
+  const itemData = await invModel.getInventoryByIdentityId(inv_id)
+  const classificationSelect = await utilities.addInventoryForm()
+
+  const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
+
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id: itemData[0].inv_id,
+    inv_make: itemData[0].inv_make,
+    inv_model: itemData[0].inv_model,
+    inv_year: itemData[0].inv_year,
+    inv_price: itemData[0].inv_price,
+    classification_id: itemData[0].classification_id
+  })
+}
+
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_price,
+  } = req.body
+
+  const updateResult = await invModel.deleteInventory(
+    inv_id,
+  )
+
+  if (updateResult) {
+    const itemName = inv_make + " " + inv_model
+    req.flash("notice", `The ${itemName} was successfully deleted.`)
+    res.redirect("/inv/")
+  } else {
+    const classificationSelect = await utilities.addInventoryForm()
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the deletion failed.")
+    res.status(501).render("inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_price,
+    })
+  }
+}
 
 
 /* ***************************

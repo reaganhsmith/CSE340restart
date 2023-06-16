@@ -85,7 +85,7 @@ async function checkClass(classification_name){
 
 
 /* *****************************
-*   Register new inventory
+*   Update inventory
 * *************************** */
 async function updateInventory(
   inv_id,
@@ -122,6 +122,20 @@ async function updateInventory(
   }
 }
 
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = 'DELETE FROM inventory WHERE inv_id = $1'
+    const data = await pool.query(sql, [inv_id])
+  return data
+  } catch (error) {
+    new Error("Delete Inventory Error")
+  }
+}
+
 // Exporting all functions together
 module.exports = {
   getClassifications,
@@ -130,5 +144,6 @@ module.exports = {
   addInv,
   addClass,
   checkClass,
-  updateInventory
+  updateInventory,
+  deleteInventory
 };
