@@ -126,4 +126,35 @@ validate.checkRegLogin = async (req, res, next) => {
   }
   next()
 }
+
+
+
+  /* ******************************
+ * Errors will be directed back to the edit view 
+ * ***************************** */
+  validate.checkUpdateData = async (req, res, next) => {
+    const account_id = parseInt(req.params.account_id)
+    const {account_firstname, account_lastname, account_email} = req.body
+    let errors = []
+
+    errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+
+      res.render("account/update", {
+        errors,
+        title: "Edit account",
+        nav,
+        account_id,
+        account_firstname,
+        account_email,
+        account_email
+      })
+      return
+    }
+    next()
+  }
+
+
   module.exports = validate

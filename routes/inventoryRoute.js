@@ -18,24 +18,26 @@ router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClas
 router.get("/detail/:inventoryId",utilities.handleErrors(invInv.buildByInventory));
 
 //Route to add a classification or inventory
-router.get("/", utilities.handleErrors(managment.addCar))
+router.get("/", utilities.checkAccountType, utilities.handleErrors(managment.addCar))
 
 //Route to add a classification
-router.get("/inv/add-classification", utilities.handleErrors(invController.buildClass.newClass))
-router.get("/add-classification", utilities.handleErrors(invController.buildClass.newClass))
+router.get("/inv/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildClass.newClass))
+router.get("/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildClass.newClass))
 
 //route to add inventory
-router.get("/inv/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
-router.get("/add-inventory", utilities.handleErrors(invController.buildInv.newInv))
+router.get("/inv/add-inventory", utilities.checkAccountType, utilities.handleErrors(invController.buildInv.newInv))
+router.get("/add-inventory", utilities.checkAccountType, utilities.handleErrors(invController.buildInv.newInv))
 
 //router post
 router.post("/add-inventory",
+utilities.checkAccountType,
 invValidate.invRules(),
 invValidate.checkInvData,
  utilities.handleErrors(invController.addInv.newInv))
 
 //router post
 router.post("/",
+utilities.checkAccountType,
 invValidate.classRules(),
 invValidate.checkClassData,
 utilities.handleErrors(invController.addClass.addNewClass))

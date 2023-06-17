@@ -15,7 +15,8 @@ router.get("/login", utilities.handleErrors(buildLogin))
 router.get("/registration", utilities.handleErrors(accountCont.buildRegister))
 
 //Route to say they have logged in successfully  
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountCont.loggedIn))
+router.get("/", 
+utilities.checkLogin, utilities.handleErrors(accountCont.loggedIn))
 
 //Route for registration 
 router.post('/registration', 
@@ -36,6 +37,17 @@ router.post(
       res.status(200).send('login process')
     }
   )
+
+
+
+//route to update the users account
+router.get("/update", utilities.handleErrors(accountCont.editAccount))
+
+//route post for update login info
+router.post("/update",
+regValidate.checkUpdateData,
+utilities.handleErrors(accountCont.updateAccount)
+)
 
   
 // Export both routers

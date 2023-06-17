@@ -125,12 +125,23 @@ Util.checkJWTToken = (req, res, next) => {
      }
      res.locals.accountData = accountData
      res.locals.loggedin = 1
-     next()
+     if (res.locals.accountData.account_type == "Employee" || res.locals.accountData.account_type =="Admin")
+      {
+        res.locals.allow = 1;
+        
+      }
+      else{
+        res.locals.allow = 0;
+      }
+      next()
     })
   } else {
    next()
   }
  }
+
+
+
 
  /* ****************************************
  *  Check Login
@@ -145,7 +156,25 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 
-
+/* ****************************************
+ *  Check if they are allowed or not on a page by account type 
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+ if (res.locals.accountData){
+    if (res.locals.allow) {
+      next()
+  }
+  else{
+    req.flash("notice", "You do not have access to this page")
+    return res.redirect("/account/")
+  }
+ }
+ else{
+  req.flash("notice", "Please log in.")
+  return res.redirect("/account/login")
+ }
+  
+ }
 
 
 /* ****************************************

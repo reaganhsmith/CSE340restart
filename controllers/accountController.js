@@ -123,5 +123,74 @@ async function loggedIn(req, res, next) {
   }
 
 
+/* ***************************
+ *  Build edit account view
+ * ************************** */
+  async function editAccount(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  if (accountData){
+  res.render("./account/update", {
+    title: "Edit",
+    nav,
+    errors: null,
+    account_id: accountData.account_id,
+    account_email : accountData.account_email,
+    account_firstname : accountData.account_firstname,
+    account_lastname : accountData.account_lasttname,
+  })}
+  else{
+        req.flash("notice", "sorry unable to update your information, please try logging in again")
+        res.status(501).render("account/login",{
+          title: "Login",
+          nav,
+          errors: null,
+        })
+}
+}
+
+
+/* ***************************
+ *  Build edit account view
+ * ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  } = req.body
+
+  const updateResult = await accountModel.updateAcc(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  )
+
+  if (updateResult) {
+    req.flash("notice", `The account was successfully updated.`)
+    res.redirect("/account")
+  } else {
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("account/update", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+    })
+  }
+}
+
+
+
+
+
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, loggedIn}
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, loggedIn, editAccount, updateAccount}
