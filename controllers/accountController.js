@@ -172,10 +172,11 @@ async function updateAccount(req, res, next) {
   )
 
   if (updateResult) {
+    
     req.flash("notice", `The account was successfully updated.`)
     res.redirect("/account")
   } else {
-    req.flash("notice", "Sorry, the insert failed.")
+    req.flash("notice", "Sorry, the update failed.")
     res.status(501).render("account/update", {
     title: "Edit Account",
     nav,

@@ -19,7 +19,7 @@
 
 
 
-<form id="updateAcc" action="/account/update" method="post">
+<form id="updateAcc" action="/account/updateInfo" method="post">
     <h2>Update first name, last name and email</h2>
     <label for="fName"> First Name:</label> 
     <input type="text" id="fName" name="account_firstname" value="<%- locals.accountData.account_firstname %>">
@@ -43,6 +43,8 @@
     <span id="pswdBtnLogin"> Show Password</span>
     
     <button type="submit" value="change password"> Submit</button>
+
+    <input type="hidden" name="account_id"<% if(locals.account) { %> value="<%= locals.account_id %>" <% } %> >
 </form>
 
 <script src="../../js/script.js"></script>
