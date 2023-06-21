@@ -118,7 +118,7 @@ async function updateInventory(
     ])
     return data
   } catch (error) {
-    console.error("model error: " + error)
+    console.error("model " + error)
   }
 }
 

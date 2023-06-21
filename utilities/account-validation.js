@@ -132,9 +132,8 @@ validate.checkRegLogin = async (req, res, next) => {
   /* ******************************
  * Errors will be directed back to the edit view 
  * ***************************** */
-  validate.checkUpdateData = async (req, res, next) => {
+  validate.checkNewData = async (req, res, next) => {
     const account_id = parseInt(req.params.account_id)
-    const {account_firstname, account_lastname, account_email} = req.body
     let errors = []
 
     errors = validationResult(req)
@@ -144,12 +143,13 @@ validate.checkRegLogin = async (req, res, next) => {
 
       res.render("account/update", {
         errors,
-        title: "Edit account",
+        title: "Edit Account",
         nav,
-        account_id,
-        account_firstname,
-        account_email,
-        account_email
+        account_firstname : res.locals.accountData.account_firstname,
+        account_lastname : res.locals.accountData.account_lastname,
+        account_email : res.locals.accountData.account_email,
+        account_id : account_id,
+
       })
       return
     }
