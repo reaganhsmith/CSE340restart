@@ -11,7 +11,6 @@
   --main-font: 'Mukta', sans-serif;
   --main-color: #b5d3e9;
   --dark-color: #195380;
-  --third-color: #0b516f;
   --dark-pink: #b85b7c;
   --light-pink: #a04674;
 
@@ -147,7 +146,7 @@ p{
 }
 
 button:hover{
-  background-color: var(--third-color);
+  background-color: var(--dark-color);
   color: white;
   cursor: pointer;
 }
@@ -200,7 +199,7 @@ margin-left: 2rem;
 .upgradeimg{
   background-color: var(--main-color);
   margin: 1rem;
-  border: solid 1px var(--third-color);
+  border: solid 1px var(--dark-color);
   width: 200px;
   height: 150px;
   display: flex;
@@ -214,7 +213,7 @@ margin-left: 2rem;
 
 
 .upgrade a{
-  color: var(--third-color);
+  color: var(--dark-color);
   font-size: 1.2rem;
 }
 
@@ -301,7 +300,7 @@ hr{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--third-color);
+  color: var(--dark-color);
 }
 
 .CarSection img{
@@ -407,7 +406,7 @@ form p a:hover{
 
 #pswdBtnLogin{
   width: 20%;
-  background-color: var(--dark-pink);
+  background-color: #531d30;
   color: white;
   padding: .5rem;
   margin-top: 1rem;
@@ -458,6 +457,50 @@ input:required:invalid, input:focus:invalid {
     text-decoration: double;
    }
 
+
+/* Update inventory section */
+.manageInv{
+  margin-left: 2rem;
+}
+
+.manageInv tr:nth-of-type(2n){
+  background-color:  rgb(229, 229, 229);
+}
+
+.manageInv p{
+  font-size: 18px;
+}
+
+.manageInv td{
+  font-family: var(--main-font);
+  font-size: 18px;
+  font-weight: 400;
+  padding: .5rem;
+}
+
+.manageInv a{
+  color: var(--dark-color);
+}
+
+.manageInv a:hover{
+  color: var(--dark-pink);
+}
+
+
+  .manageInv th{
+    font-family: var(--main-font);
+    color: var(--dark-color);
+    font-size: 24px;
+  }
+
+.manage select{
+  font-size: 19px;
+}
+
+#newClass{
+  font-family: var(--main-font);
+  font-size: 16px;
+}
 
 
 span{
@@ -603,4 +646,13 @@ span{
     width: 50%;
 
   }
+  
+  .manageInv th{
+    font-size: 22px;
+  }
+  
+  .manageInv td{
+  font-family: var(--main-font);
+  font-size: 18px;
+}
 }
