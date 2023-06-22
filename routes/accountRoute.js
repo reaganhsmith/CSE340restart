@@ -45,13 +45,15 @@ router.get("/update", utilities.handleErrors(accountCont.editAccount))
 
 //route post for update login info
 router.post("/updateAccount",
+regValidate.checkAccountUpdate(),
 regValidate.checkNewData,
 utilities.handleErrors(accountCont.updateAccount))
 
 
 //route post for update account password 
 router.post("/updatePassword",
-regValidate.passwordVal,
+regValidate.passwordValidation(),
+regValidate.checkNewData,
 utilities.handleErrors(accountCont.updatePassword))
 
   
