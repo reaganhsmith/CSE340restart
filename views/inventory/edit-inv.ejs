@@ -30,15 +30,15 @@
     <input type="text" id="model" name="inv_model" minlength="3" required placeholder="min of 3 characters"  value="<%= locals.inv_model %>">
 
     <label for="description">Description:</label>
-    <textarea id="description" name="inv_description" rows="4" cols="50" required placeholder="please give a short description of the vehicle" value="<%= locals.inv_description %>"></textarea>
+    <textarea id="description" name="inv_description" rows="4" cols="50" required placeholder="Enter the vehicle's description"><%= locals.inv_description %></textarea>
 
     <label for="imagePath">Image Path:</label>
     <span>If you do not have an image use this path /images/vehicles/noimage.jpg</span>
-    <input type="text" id="imagePath" name="inv_image" required placeholder="/images/vehicles/vehicleNAME.jpg" value="/images/vehicles/noimage.jpg">
+    <input type="text" id="imagePath" name="inv_image" required placeholder="/images/vehicles/vehicleNAME.jpg" value="<%= locals.inv_image %>">
 
     <label for="thumbnailPath">Thumbnail Path:</label>
     <span>If you do not have an image use this path /images/vehicles/noimage.jpg</span>
-    <input type="text" id="thumbnailPath" name="inv_thumbnail" required placeholder="/images/vehicles/vehicleNAME-tn.jpg" value="/images/vehicles/noimage.jpg">
+    <input type="text" id="thumbnailPath" name="inv_thumbnail" required placeholder="/images/vehicles/vehicleNAME-tn.jpg" value="<%= locals.inv_thumbnail %>">
 
     <label for="price">Price:</label>
     <input type="text" id="price" name="inv_price" pattern="[\d,\.]+" required placeholder="decimal or integer"  value="<%= locals.inv_price %>"> 
