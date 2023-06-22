@@ -44,9 +44,15 @@ router.post(
 router.get("/update", utilities.handleErrors(accountCont.editAccount))
 
 //route post for update login info
-router.post("/update-account",
+router.post("/updateAccount",
 regValidate.checkNewData,
 utilities.handleErrors(accountCont.updateAccount))
+
+
+//route post for update account password 
+router.post("/updatePassword",
+regValidate.passwordVal,
+utilities.handleErrors(accountCont.updatePassword))
 
   
 // Export both routers

@@ -19,7 +19,7 @@
 
 
 
-<form id="updateAcc" action="/account/update-account" method="post">
+<form id="updateAcc" action="/account/updateAccount" method="post">
     <h2>Update first name, last name and email</h2>
     <label for="fName"> First Name:</label> 
     <input type="text" id="fName" name="account_firstname" value="<%- locals.accountData.account_firstname %>">
@@ -31,7 +31,7 @@
     <input type="text" id="accEmail" name="account_email" value="<%- locals.accountData.account_email %>">
 
     <button type="submit" value="Update account"> Submit</button>
-    <input type="hidden" name="account_id"<% if(locals.account) { %> value="<%= locals.accountData.account_id %>" <% } %> >
+    <input type="hidden" name="account_id"<% if(locals.accountData) { %> value="<%= locals.accountData.account_id %>" <% } %> >
   
   </form>
 
@@ -44,7 +44,7 @@
     
     <button type="submit" value="change password"> Submit</button>
 
-    <input type="hidden" name="account_id"<% if(locals.account) { %> value="<%= locals.account_id %>" <% } %> >
+    <input type="hidden" name="account_id"<% if(locals.accountData) { %> value="<%= locals.accountData.account_id %>" <% } %> >
 </form>
 
 <script src="../../js/script.js"></script>

@@ -157,4 +157,25 @@ validate.checkRegLogin = async (req, res, next) => {
   }
 
 
+
+/*  **********************************
+*  Pasword validation
+* ********************************* */
+validate.passwordVal = () => {
+return [
+  // password is required and must be strong password
+  body("account_password")
+    .trim()
+    .isStrongPassword({
+      minLength: 12,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+    .withMessage("Password does not meet requirements."),
+]
+}
+
+
   module.exports = validate
