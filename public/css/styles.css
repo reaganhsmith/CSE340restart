@@ -12,6 +12,8 @@
   --main-color: #b5d3e9;
   --dark-color: #195380;
   --third-color: #0b516f;
+  --dark-pink: #b85b7c;
+  --light-pink: #a04674;
 
 }
 
@@ -23,7 +25,10 @@
   font-family: var(--main-font);
   color: var(--dark-color);
   font-weight: 800;
-  margin-left: 2rem;
+}
+
+.siteName{
+  padding-left: 2rem;
 }
 
 
@@ -34,6 +39,11 @@ nav a, #tools a{
   color: var(--dark-color);
   font-weight: 200;
   text-transform: uppercase;
+}
+
+#tools a{
+  display: flex;
+  flex-direction: column;
 }
 
 nav a{
@@ -48,7 +58,7 @@ nav a{
 }
 
 a:hover, #tools a:hover{
-  color: var(--third-color);
+  color: var(--light-pink);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -58,7 +68,7 @@ a:hover, #tools a:hover{
 nav{
   background-color: var(--main-color);
   color: var(--dark-color);
-  padding: .8rem;
+  padding: .6rem;
 }
 
 nav ul{
@@ -71,13 +81,18 @@ nav ul{
   font-size: 1.5rem;
   gap: 1rem;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-nav ul li:hover{
-  color: var(--third-color);
+nav a:hover{
+  color: var(--dark-pink);
   font-weight: 800;
-  font-size: 1.8rem;
   cursor: pointer;
+  font-size: 14px;
+}
+
+nav ul li:visited{
+  color: #b85b7c;
 }
 /*----------- MAIN SECTION OF THE PAGE -----------*/
 
@@ -332,7 +347,23 @@ font-size: 18px;
   display: inline;
 }
 
-/* ACCOUNT STYLE */
+/* ACCOUNT MANAGE STYLE */
+.accountManage{
+  margin-left: 2rem;
+}
+
+.accountManage a:hover{
+  color: var(--dark-color);
+}
+
+.accountManage a{
+  color: var(--dark-pink);
+  font-family: var(--main-font);
+  font-size: 1.2rem;
+}
+.accountManage a:visited{
+  color: var(--light-pink);
+}
 
 /* LOGIN FORM STYLE */
 
@@ -374,9 +405,23 @@ form p a:hover{
   font-size: 1.4rem;
 }
 
+#pswdBtnLogin{
+  width: 20%;
+  background-color: var(--dark-pink);
+  color: white;
+  padding: .5rem;
+  margin-top: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+#pswdBtnLogin:hover{
+  background-color: var(--dark-color);
+}
+
 
 input:required:invalid, input:focus:invalid {
-  border: solid 3px rgb(181, 90, 90);
+  border: solid 3px var(--dark-pink);
  }
  
  input:required:valid {
@@ -418,6 +463,12 @@ input:required:invalid, input:focus:invalid {
 span{
   font-size: 1rem;
 }
+
+
+/* Update account forms */
+#passwordChange{
+  margin-top: 2rem;
+}
   
 /* MEDIA QUERY SECTION */
 
@@ -440,6 +491,10 @@ span{
     font-size: 24px;
   }
 
+  nav a:hover{
+    font-size: 26px;
+  }
+
   .bottomhalf {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -458,6 +513,10 @@ span{
 
   .ctaBox{
     left: 30px;
+  }
+
+  #tools a{
+    font-size: 1.4rem;
   }
 
   #top-header{
