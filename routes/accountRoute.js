@@ -11,6 +11,10 @@ const buildLogin = accountCont.buildLogin
 // Route to build login page
 router.get("/login", utilities.handleErrors(buildLogin))
 
+
+// Route to build login page
+router.get("/logout", utilities.deleteJwt, utilities.handleErrors(buildLogin))
+
 //Route to build registration page 
 router.get("/registration", utilities.handleErrors(accountCont.buildRegister))
 

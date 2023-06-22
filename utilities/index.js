@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accModel = require("../models/account-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -176,7 +177,19 @@ Util.checkAccountType = (req, res, next) => {
   
  }
 
-
+/* ****************************************
+ *  Deletes the cookies and jwt
+ * ************************************ */
+Util.deleteJwt = (req, res, next) =>{
+  if(req.cookies.jwt)
+{
+  res.clearCookie("jwt", {httpOnly: true})
+  return res.status(403).redirect("/")
+  
+}else{
+  next()
+}
+}
 
 /* ****************************************
  * Middleware For Handling Errors

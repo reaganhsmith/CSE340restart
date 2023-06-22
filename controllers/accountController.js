@@ -168,7 +168,11 @@ async function updateAccount(req, res, next) {
   )
 
   if(updateResult){
-    req.flash("notice", `Congrats ${account_firstname}, the account was successfully updated!`)
+    utilities.deleteJwt
+    const accountData = await accountModel.getAccountById(account_id)
+    accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, {expiresIn: 3600 * 1000})
+    res.cookie("jwt", accessToken, {httpOnly: true})
+    req.flash("notice", `Congrats ${account_firstname}, the account was successfully updated! `)
     res.redirect("/account/")
   }
   else{
