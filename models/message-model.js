@@ -21,20 +21,14 @@ async function getMessagesById (message_to) {
 /* *****************************
 * Get message info from database
 * ***************************** */
-async function getMessagesInfo (message_to) {
-    try {
-      const result = await pool.query(
-        'SELECT message_subject, message_created, message_from, message_read FROM public.message WHERE message_to = $1',
-        [message_to])
-      return result.rows[0]
-    } catch (error) {
-      return new Error("No messages were found")
-    }
-  }
+async function getMessages(){
+  return await pool.query("SELECT * FROM public.message")
+}
+
 
 
 
     // Exporting all functions together
 module.exports = {getMessagesById,
-    getMessagesInfo
+    getMessages
   };

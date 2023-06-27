@@ -62,8 +62,6 @@ regValidate.checkNewData,
 utilities.handleErrors(accountCont.updatePassword))
 
 
-//Route to build registration page 
-router.get("/inbox", utilities.handleErrors(messageCont.inboxHome))
 
   
 // Export both routers

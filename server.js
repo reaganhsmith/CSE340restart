@@ -19,6 +19,7 @@ const accountRoutes = require("./routes/accountRoute")
 const routes = require("./routes/static")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const messageRoutes = require("./routes/messageRoute")
 
 
 /* ***********************
@@ -71,6 +72,9 @@ app.get('/trigger-error', utilities.handleErrors(invController.createError.gener
 
 // Route for accounts page
 app.use("/account", utilities.handleErrors(accountRoutes))
+
+// Route for message
+app.use("/messages", utilities.handleErrors(messageRoutes))
 
 
 // File Not Found Route - must be last route in list
