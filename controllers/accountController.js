@@ -1,5 +1,6 @@
 const utilities = require('../utilities/index')
 const accountModel = require('../models/account-model')
+const messageModel = require('../models/message-model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -115,10 +116,15 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function loggedIn(req, res, next) {
     let nav = await utilities.getNav()
+    const account_id = parseInt(req.params.account_id)
+    const inboxAmount = await messageModel.getMessagesById(account_id)
+
+    
     res.render("account/accounthome", {
       title: "You're Logged in",
       nav,
       errors: null,
+      inboxAmount: inboxAmount,
     })
   }
 
@@ -237,6 +243,7 @@ async function updatePassword(req, res, next) {
   }
 
 }
+
 
 
 

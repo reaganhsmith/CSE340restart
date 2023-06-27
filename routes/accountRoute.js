@@ -4,6 +4,7 @@ const utilities = require('../utilities/index')
 const regValidate = require('../utilities/account-validation')
 
 const accountCont = require('../controllers/accountController')
+const messageCont = require('../controllers/messageController')
 
 //accessing the build
 const buildLogin = accountCont.buildLogin
@@ -59,6 +60,10 @@ router.post("/updatePassword",
 regValidate.passwordValidation(),
 regValidate.checkNewData,
 utilities.handleErrors(accountCont.updatePassword))
+
+
+//Route to build registration page 
+router.get("/inbox", utilities.handleErrors(messageCont.inboxHome))
 
   
 // Export both routers

@@ -85,6 +85,10 @@ async function updatePassword(account_id, account_password){
     console.error ("model " + error)
   }
 }
+
+
+
+
   // Exporting all functions together
 module.exports = {
     registerAccount,
