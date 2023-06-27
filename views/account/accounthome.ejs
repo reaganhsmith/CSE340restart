@@ -23,6 +23,7 @@
       <h2> Update Account</h2>
     <a href="/account/update"> &#x2699; Click here for account settings </a>
     <h2>Message Center</h2>
+    <p>You have <%= inboxAmount %> new messages</p>
     <p> Go to <a href="/account/inbox"> inbox </a></p>
     <% } else{ %>
     <h2>Welcome back, <strong> <%- locals.accountData.account_firstname %></strong>  </h2>

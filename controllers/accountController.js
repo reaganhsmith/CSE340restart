@@ -116,10 +116,10 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function loggedIn(req, res, next) {
     let nav = await utilities.getNav()
-    const account_id = parseInt(req.params.account_id)
-    const inboxAmount = await messageModel.getMessagesById(account_id)
 
-    
+    const inboxAmount = await messageModel.getMessagesById(21)
+
+
     res.render("account/accounthome", {
       title: "You're Logged in",
       nav,
