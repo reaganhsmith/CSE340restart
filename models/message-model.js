@@ -24,7 +24,7 @@ async function getMessagesById (message_to) {
 async function getMessagesInfo (message_to) {
     try {
       const result = await pool.query(
-        'SELECT message_subject, message_created, message_from, message_read FROM message WHERE message_to = $1',
+        'SELECT message_subject, message_created, message_from, message_read FROM public.message WHERE message_to = $1',
         [message_to])
       return result.rows[0]
     } catch (error) {
