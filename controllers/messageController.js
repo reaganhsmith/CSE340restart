@@ -17,14 +17,12 @@ async function inboxHome(req, res, next) {
   const accountData = await accountModel.getAccountById(account_id)
   const accountInfo = accountData.account_id
 
-  const data = await messageModel.getMessages(accountInfo)
-  const table = await utilities.messageInfo(data)
+
 
       res.render("messages/inbox", {
         title: "Inbox",
         nav,
         errors: null,
-        table,
         account_id: accountInfo,
 
       })
