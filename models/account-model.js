@@ -55,6 +55,10 @@ async function getAccountById (account_id) {
   }
 }
 
+
+/* *****************************
+* Updates account info
+* ***************************** */
 async function updateAcc(account_id, account_firstname, account_lastname, account_email){
   try{
     const sql = "UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *"
@@ -88,6 +92,13 @@ async function updatePassword(account_id, account_password){
 
 
 
+/* *****************************
+* Return account data using email address
+* ***************************** */
+async function getAccountInfo(){
+  return await pool.query("SELECT * FROM public.account ORDER BY account_firstname")
+}
+
 
   // Exporting all functions together
 module.exports = {
@@ -96,5 +107,6 @@ module.exports = {
     getAccountByEmail,
     getAccountById,
     updateAcc,
-    updatePassword
+    updatePassword, 
+    getAccountInfo
   };

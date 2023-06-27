@@ -192,34 +192,7 @@ Util.deleteJwt = (req, res, next) =>{
 }
 }
 
-/* ****************************************
- *  Build table to show message info
- * ************************************ */
-  Util.messageInfo = async function(data){
-    let messages
-    // if(data.length > 0){
-      messages += '<div class="messageSection">'
-      messages += '<table>'
-      messages += '<tr> <th>Received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>'
-      // data.forEach((message) => {
-
-      //   messages += '<th>'
-      //   messages += '<td>' + message.message_created + '</td>'
-      //   messages += '<td>' + message.message_subject + '</td>'
-      //   messages += '<td>' + message.message_to + '</td>'
-      //   messages += '<td>' + message.message_read + '</td>'
-      //   messages += '</th>'
-
-      // });
-      messages += '</table>'
-      messages += '</div>'
-    // } else {
-    //   messages += '<p class="notice"> Sorry, there are no messages. </p>';
-    // }
-    return messages
-  }
   
-
 
 
 

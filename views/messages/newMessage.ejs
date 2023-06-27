@@ -16,3 +16,17 @@
    </ul>
   <% } %>
 
+<form id="sendMessage" action="/messages/sent" method="post">
+
+
+  <label for="subject">Subject</label> 
+  <input type="text" id="subject" name="message_subject" required>
+
+  <label for="message">Message:</label>
+  <textarea id="message" name="message_body" rows="4" cols="50" required></textarea>
+
+
+  <button type="submit" value="Send Message"> Submit</button>
+
+  <input type="hidden" name="message_from"<% if(locals.accountData) { %> value="<%= locals.accountData.account_id %>" <% } %> >
+</form>

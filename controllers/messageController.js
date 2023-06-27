@@ -35,12 +35,16 @@ async function inboxHome(req, res, next) {
  * ************************** */
 async function newMessage(req, res, next) {
 
+  const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
 
       res.render("messages/newMessage", {
         title: "Send New Message",
         nav,
         errors: null,
+        account_id: account_id,
+
       })
   
     }
