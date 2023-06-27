@@ -21,9 +21,16 @@ async function getMessagesById (message_to) {
 /* *****************************
 * Get message info from database
 * ***************************** */
-async function getMessages(){
-  return await pool.query("SELECT * FROM public.message")
-}
+async function getMessages(account_id){
+try{
+  const sql = ("SELECT * FROM public.message WHERE message_to = $1")
+  const data = await pool.query(sql, [account_id])
+  return data.rows[0]
+  
+
+}catch(error){
+  console.error ("model " + error)
+}}
 
 
 

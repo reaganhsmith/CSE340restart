@@ -36,27 +36,27 @@ Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
     grid = '<ul id="inv-display">'
-    data.forEach(vehicle => { 
+    data.forEach(vehicle => {
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id
+      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model
+      + 'details"><img src="' + vehicle.inv_thumbnail
+      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View '
+      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">'
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
-      grid += '<span>$' 
+      grid += '<span>$'
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
     grid += '</ul>'
-  } else { 
+  } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
@@ -74,7 +74,7 @@ Util.buildVehicleInformation = async function(vehicleData){
     carInfo += '<div class="CarSection">';
     vehicleData.forEach(vehicle => {
       carInfo += '<div><img src="' + vehicle.inv_image
-                 +'" alt="Image of '+ vehicle.inv_make + ' ' 
+                 +'" alt="Image of '+ vehicle.inv_make + ' '
                  + vehicle.inv_model + ' on CSE Motors" /></div>';
       carInfo += '<div class="CarDetails">';
       carInfo += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </h2>';
@@ -85,7 +85,7 @@ Util.buildVehicleInformation = async function(vehicleData){
       carInfo += '</div>';
     });
     carInfo += '</div>';
-  } else { 
+  } else {
     carInfo += '<p class="notice"> Sorry, there is no information about this vehicle. </p>';
   }
   return carInfo;
@@ -130,7 +130,7 @@ Util.checkJWTToken = (req, res, next) => {
      if (res.locals.accountData.account_type == "Employee" || res.locals.accountData.account_type =="Admin")
       {
         res.locals.allow = 1;
-        
+
       }
       else{
         res.locals.allow = 0;
@@ -159,7 +159,7 @@ Util.checkJWTToken = (req, res, next) => {
 
 
 /* ****************************************
- *  Check if they are allowed or not on a page by account type 
+ *  Check if they are allowed or not on a page by account type
  * ************************************ */
 Util.checkAccountType = (req, res, next) => {
  if (res.locals.accountData){
@@ -175,7 +175,7 @@ Util.checkAccountType = (req, res, next) => {
   req.flash("notice", "Please log in.")
   return res.redirect("/account/login")
  }
-  
+
  }
 
 /* ****************************************
@@ -186,23 +186,22 @@ Util.deleteJwt = (req, res, next) =>{
 {
   res.clearCookie("jwt", {httpOnly: true})
   return res.status(403).redirect("/")
-  
+
 }else{
   next()
 }
 }
 
 /* ****************************************
- *  Build table to show message info 
+ *  Build table to show message info
  * ************************************ */
-  Util.messageInfo = async function(req, res, next){
-    
+  Util.messageInfo = async function(data){
     let messages
     // if(data.length > 0){
       messages += '<div class="messageSection">'
       messages += '<table>'
       messages += '<tr> <th>Received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>'
-      // data.forEach(message => {
+      // data.forEach((message) => {
 
       //   messages += '<th>'
       //   messages += '<td>' + message.message_created + '</td>'
@@ -210,25 +209,24 @@ Util.deleteJwt = (req, res, next) =>{
       //   messages += '<td>' + message.message_to + '</td>'
       //   messages += '<td>' + message.message_read + '</td>'
       //   messages += '</th>'
-        
+
       // });
       messages += '</table>'
       messages += '</div>'
-    // } else { 
+    // } else {
     //   messages += '<p class="notice"> Sorry, there are no messages. </p>';
     // }
-    return messages;
+    return messages
   }
-
-
-
   
+
+
 
 
 
 /* ****************************************
  * Middleware For Handling Errors
- * Wrap other function in this for 
+ * Wrap other function in this for
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)

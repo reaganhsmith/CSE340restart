@@ -1,5 +1,6 @@
 const utilities = require('../utilities/index')
 const messageModel = require('../models/message-model')
+const accountModel = require('../models/account-model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -10,10 +11,13 @@ require("dotenv").config()
  *  This is the function to build the inbox page
  * ************************** */
 async function inboxHome(req, res, next) {
-  const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
 
-  const data = await messageModel.getMessages()
+  const account_id = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountById(account_id)
+  const accountInfo = accountData.account_id
+
+  const data = await messageModel.getMessages(accountInfo)
   const table = await utilities.messageInfo(data)
 
       res.render("messages/inbox", {
@@ -21,6 +25,8 @@ async function inboxHome(req, res, next) {
         nav,
         errors: null,
         table,
+        account_id: accountInfo,
+
       })
   
     }

@@ -111,22 +111,33 @@ async function accountLogin(req, res) {
  }
 
 
-/* ****************************************
-*  Deliver congrats login view
-* *************************************** */
+/* ***************************
+ *  Build Login view
+ * ************************** */
 async function loggedIn(req, res, next) {
-    let nav = await utilities.getNav()
 
-    const inboxAmount = await messageModel.getMessagesById(21)
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  const inboxAmount = await messageModel.getMessagesById(account_id)
 
-
-    res.render("account/accounthome", {
-      title: "You're Logged in",
-      nav,
-      errors: null,
-      inboxAmount: inboxAmount,
-    })
-  }
+  if (accountData){
+  res.render("account/accounthome", {
+    title: "You are Logged in",
+    nav,
+    errors: null,
+    account_id: account_id,
+    inboxAmount: inboxAmount,
+  })}
+  else{
+        req.flash("notice", "sorry unable to login please try again")
+        res.status(501).render("account/login",{
+          title: "Login",
+          nav,
+          errors: null,
+        })
+}
+}
 
 
 /* ***************************
