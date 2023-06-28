@@ -125,7 +125,6 @@ async function loggedIn(req, res, next) {
     title: "You are Logged in",
     nav,
     errors: null,
-    account_id: account_id,
   })}
   else{
         req.flash("notice", "sorry unable to login please try again")

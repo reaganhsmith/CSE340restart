@@ -17,6 +17,10 @@ router.get("/newMessage", utilities.handleErrors(messageCont.newMessage))
 //Route to build registration page 
 router.get("/archives", utilities.handleErrors(messageCont.archiveMess))
 
+// Router post for sent message
+router.post("/sent",
+utilities.handleErrors(messageCont.sentMessage))
+
 
 // Export both routers
 module.exports = router;

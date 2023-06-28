@@ -23,7 +23,6 @@ async function inboxHome(req, res, next) {
         title: "Inbox",
         nav,
         errors: null,
-        account_id: accountInfo,
 
       })
   
@@ -67,10 +66,48 @@ async function archiveMess(req, res, next) {
       })
   
     }
-    
+
+/* ***************************
+ *  This is the function to send a message
+ * ************************** */
+async function sentMessage(req, res, next) {
+
+  let nav = await utilities.getNav()
+  const accountSelect = await utilities.selectAccount()
+
+  const {message_to, message_subject, message_body, message_from} = req.body
+  const messageResults = await messageModel.sendMessage(
+    message_to,
+    message_subject,
+    message_body,
+    message_from
+  )
+  
+  if(messageResults){
+    req.flash(
+      "notice",
+      `Congratulations, you sent a message!`
+    )
+    res.status(201).render("messages/inbox",{
+      title: "Inbox",
+      nav,
+      errors: null,
+    })
+  } else{
+    req.flash("notice", "sorry unable to send message")
+    res.status(501).render("messages/newMessage",{
+      title: "Send New Message",
+      nav,
+      errors: null,
+      accountSelect,
+    })
+  }
+}
+
 
 module.exports = {
   inboxHome,
   newMessage,
-  archiveMess
+  archiveMess,
+  sentMessage
 }

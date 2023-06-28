@@ -199,7 +199,7 @@ Util.deleteJwt = (req, res, next) =>{
 * ************************************ */
 Util.selectAccount = async function (req, res, next) {
   let data = await accModel.getAccountInfo()
-  let form = '<select id="account" name="account_id" required >'
+  let form = '<select id="account" name="message_to" required >'
   form += '<option value =""> Select a recipient </option>'
   data.rows.forEach((row) => {
     form += '<option value="'+row.account_id + '">'

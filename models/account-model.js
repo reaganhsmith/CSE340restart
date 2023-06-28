@@ -100,6 +100,10 @@ async function getAccountInfo(){
 }
 
 
+
+
+
+
   // Exporting all functions together
 module.exports = {
     registerAccount,
