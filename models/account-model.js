@@ -96,7 +96,7 @@ async function updatePassword(account_id, account_password){
 * Return account data using email address
 * ***************************** */
 async function getAccountInfo(){
-  return await pool.query("SELECT * FROM public.account ORDER BY account_firstname")
+  return await pool.query("SELECT * FROM public.account")
 }
 
 
