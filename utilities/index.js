@@ -210,6 +210,52 @@ Util.selectAccount = async function (req, res, next) {
 }
 
 
+/* **************************************
+* Build the inbox view mail table
+* ************************************ */
+Util.buildInboxGrid = async function(data){
+  let grid
+  if(data > 0){
+    grid = '<table>'
+    grid +='<tr> <th>recieved</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>'
+    data.forEach(message => {
+      grid += '<tr>'
+      grid += '<td>' + message.message_created + '</td>'
+      grid += '<td>' + message.message_subject + '</td>'
+      grid += '<td>' + message.message_from + '</td>'
+      grid += '<td>' + message.message_read + '</td>'
+      grid += '</tr>'
+    })
+    grid += '</table>'
+  } else {
+    grid += '<p class="notice">Sorry, no mail.</p>'
+  }
+  return grid
+  }
+
+
+
+/* **************************************
+* Build Message Info
+* ************************************ */
+Util.buildMessageInfo = async function(messageData){
+  let info = "";
+  if(1 > 0){
+    info += '<div class="messageSection">';
+    messageData.forEach((message) => {
+      info += '<p><strong>Subject: </strong>' + message.message_subject + '</p>'
+      info += '<p><strong> From: </strong>' + message.message_from + '</p>'
+      info += '<p><strong>Message: </strong> </p>'
+      info += '<p>' + message.message_body + '</p>'
+    });
+    info += '</div>';
+  } else {
+    info += '<p class="notice"> Sorry, there is no information about this vehicle. </p>';
+  }
+  return info;
+}
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for

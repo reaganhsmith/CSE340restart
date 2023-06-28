@@ -4,9 +4,6 @@ const utilities = require('../utilities/')
 
 const messageCont = require("../controllers/messageController")
 
-
-
-
 //Route to view imbox
 router.get("/", utilities.handleErrors(messageCont.inboxHome))
 
@@ -20,6 +17,11 @@ router.get("/archives", utilities.handleErrors(messageCont.archiveMess))
 // Router post for sent message
 router.post("/sent",
 utilities.handleErrors(messageCont.sentMessage))
+
+//Route for each message
+router.get("/:message_id", utilities.handleErrors(messageCont.MessageID))
+
+
 
 
 // Export both routers

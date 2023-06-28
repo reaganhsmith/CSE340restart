@@ -17,17 +17,18 @@ async function inboxHome(req, res, next) {
   const accountData = await accountModel.getAccountById(account_id)
   const accountInfo = accountData.account_id
 
-
-
+  const data = await messageModel.getMessageInfo(accountInfo)
+  const grid = await utilities.buildInboxGrid(data) 
       res.render("messages/inbox", {
         title: "Inbox",
         nav,
         errors: null,
+        grid,
+        data, 
 
       })
   
     }
-
 
 /* ***************************
  *  This is the function to build the inbox page
@@ -66,6 +67,8 @@ async function archiveMess(req, res, next) {
       })
   
     }
+
+
 
 /* ***************************
  *  This is the function to send a message
@@ -109,9 +112,28 @@ async function sentMessage(req, res, next) {
 }
 
 
+/* ***************************
+ *  Build message view by message_id
+ * ************************** */
+async function MessageID(req, res, next) {
+  const message_id = req.params.message_id
+  const messageData = await messageModel.getMessageById(message_id)
+  const info = await utilities.buildMessageInfo(messageData)
+  let nav = await utilities.getNav()
+
+  res.render("./messages/message", {
+    title: "Message",
+    nav,
+    info,
+    errors: null,
+  })
+}
+
+
 module.exports = {
   inboxHome,
   newMessage,
   archiveMess,
-  sentMessage
+  sentMessage,
+  MessageID
 }
