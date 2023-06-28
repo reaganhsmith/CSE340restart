@@ -82,11 +82,15 @@ async function sentMessage(req, res, next) {
     message_body,
     message_from
   )
+
+  const sentAccountData = await accountModel.getAccountById(message_to)
+  const accountName = sentAccountData.account_firstname
+
   
   if(messageResults){
     req.flash(
       "notice",
-      `Congratulations, you sent a message!`
+      `Congratulations, you sent a message to ${accountName}!`
     )
     res.status(201).render("messages/inbox",{
       title: "Inbox",
