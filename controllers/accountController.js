@@ -120,7 +120,7 @@ async function loggedIn(req, res, next) {
   let nav = await utilities.getNav()
 
   const accountData = await accountModel.getAccountById(account_id)
-  
+  const unreadMessages = await messageModel.countMessages(account_id)
 
 
   if (accountData){
