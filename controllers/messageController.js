@@ -1,6 +1,7 @@
 const utilities = require('../utilities/index')
 const messageModel = require('../models/message-model')
 const accountModel = require('../models/account-model')
+const invModel = require('../models/inventory-model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -12,23 +13,19 @@ require("dotenv").config()
  * ************************** */
 async function inboxHome(req, res, next) {
   let nav = await utilities.getNav()
+  
 
-  const account_id = parseInt(req.params.account_id)
-  const accountData = await accountModel.getAccountById(account_id)
-  const accountInfo = accountData.account_id
-
-  const data = await messageModel.getMessageInfo(accountInfo)
-  const grid = await utilities.buildInboxGrid(data) 
       res.render("messages/inbox", {
         title: "Inbox",
         nav,
         errors: null,
-        grid,
-        data, 
-
       })
   
     }
+
+
+
+
 
 /* ***************************
  *  This is the function to build the inbox page
@@ -112,23 +109,43 @@ async function sentMessage(req, res, next) {
 }
 
 
+
 /* ***************************
- *  Build message view by message_id
+ *  Build message info section
  * ************************** */
 async function MessageID(req, res, next) {
-  const message_id = req.params.message_id
-  const messageData = await messageModel.getMessageById(message_id)
-  const info = await utilities.buildMessageInfo(messageData)
   let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+
+  
+
+  const messageData = await messageModel.getMessageById(message_id)
+
+  if (!messageData) {
+      req.flash('error', 'That message does not exist');
+      return res.status(400).render('messages/inbox', {
+        title: 'Inbox',
+        nav,
+        errors: null,
+      });
+    }
+
+  const messageSubject = messageData.message_subject
+  const sender_id = messageData.message_from
+  const messageBody = messageData.message_body
+
+  const fromData = accountModel.getAccountById(sender_id)
+  const messageFrom = fromData.account_firstname
 
   res.render("./messages/message", {
-    title: "Message",
+    title: messageSubject,
     nav,
-    info,
     errors: null,
+    messageFrom: sender_id,
+    messageBody: messageBody,
+
   })
 }
-
 
 module.exports = {
   inboxHome,
