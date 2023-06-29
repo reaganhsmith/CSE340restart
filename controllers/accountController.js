@@ -121,7 +121,7 @@ async function loggedIn(req, res, next) {
 
   const accountData = await accountModel.getAccountById(account_id)
   
-  const unreadMessages = await messageModel.countMessages(accountData.account_id)
+
 
   if (accountData){
   res.render("account/accounthome", {

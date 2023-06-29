@@ -66,8 +66,6 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
 * Build the car view HTML
 * ************************************ */
-
-
 Util.buildVehicleInformation = async function(vehicleData){
   let carInfo = "";
   if(vehicleData.length > 0){
@@ -254,6 +252,9 @@ Util.buildMessageInfo = async function(messageData){
   }
   return info;
 }
+
+
+
 
 
 /* ****************************************
