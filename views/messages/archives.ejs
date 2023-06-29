@@ -1,22 +1,22 @@
-
 <!-- THE CONTENT HEADING -->
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-      res.redirect('/')
-    } %>
+  <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
 
 <!-- Messages or error mesages  -->
 <%- messages() %>
 
 <% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 
+<%- messageTable %>
 
-<%- account_id %>
+<p> Go to <a href="/messages"> Return to inbox </a></p>

@@ -21,7 +21,9 @@ utilities.handleErrors(messageCont.sentMessage))
 //Route for each message
 router.get("/:message_id", utilities.handleErrors(messageCont.MessageID))
 
-
+// Router post for sent message
+router.post("/delete",
+utilities.handleErrors(messageCont.deleteMessage))
 
 
 // Export both routers

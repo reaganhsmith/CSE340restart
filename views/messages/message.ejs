@@ -26,8 +26,10 @@
 
 <div class="messageOpt">
 <a href="/messages"> Return to Inbox</a>
-<button> Reply </button>
-<button> Mark as Read </button>
-<button> Mark as Archive </button>
-<button> Delete Message </button>
+<form>
+<button formaction="/messages/reply" formmethod="post"> Reply </button>
+<button formaction="/messages/read" formmethod="post"> Mark as Read </button>
+<button formaction="/message/archive" formmethod="post"> Mark as Archive </button>
+<button formaction="/messages/delete" formmethod="post"> Delete Message </button>
+</form>
 </div>

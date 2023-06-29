@@ -96,3 +96,10 @@ CREATE TABLE IF NOT EXISTS public.message
 
 INSERT INTO public.message (message_subject, message_body, message_to, message_from)
 VALUES ('Test Message', 'This message is a test to check if the message system is working', 21, 20)
+
+
+UPDATE public.message SET message_archived = true WHERE message_id = 4 RETURNING *
+
+DELETE FROM public.message WHERE message_id = 6
+
+UPDATE public.message SET message_read = true WHERE message_id = 4 RETURNING *

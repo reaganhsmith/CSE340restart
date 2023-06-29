@@ -41,7 +41,7 @@ async function countMessages(message_to){
 async function getMessageInfo(message_to) {
   try {
     const messageData = await pool.query(
-      "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = false",
+      "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = false ORDER BY message_created",
       [message_to]
     )
     return messageData.rows
@@ -69,18 +69,18 @@ async function getMessageById(message_id) {
 
 
 
-/* ***************************
- *  Get all inventory items and inventory_id and name
- * ************************** */
-async function getMessageArchives(message_id) {
+/* *****************************
+*   Get account archived messages
+* *************************** */
+async function getMessageArchives(message_to) {
   try {
     const messageData = await pool.query(
-      "SELECT * FROM public.message WHERE message_id = $1 AND message_archived = true",
-      [message_id]
+      "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = true",
+      [message_to]
     )
-    return messageData.rows[0]
+    return messageData.rows
   } catch (error) {
-    console.error("getMessageById error: " + error)
+    console.error("getMessageInfo error: " + error)
   }
 }
 
@@ -103,6 +103,19 @@ async function countArchives(message_to){
   }
 }
 
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteMessage(message_id) {
+  try {
+    const sql = 'DELETE FROM public.message WHERE message_id = $1'
+    const data = await pool.query(sql, [message_id])
+  return data
+  } catch (error) {
+    new Error("Delete Message Error")
+  }
+}
+
 
     // Exporting all functions together
 module.exports = {
@@ -111,5 +124,6 @@ module.exports = {
   getMessageInfo,
   getMessageById,
   countArchives,
-  getMessageArchives
+  getMessageArchives,
+  deleteMessage
   };
