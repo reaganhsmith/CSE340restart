@@ -23,7 +23,7 @@
       <h2> Update Account</h2>
     <a href="/account/update"> &#x2699; Click here for account settings </a>
     <h2>Message Center</h2>
-    <p>You have <%- unreadMessages %> new messages</p>
+    <p>You have <%= unreadMessages %> new messages</p>
     <p> Go to <a href="/messages"> inbox </a></p>
     <% } else{ %>
     <h2>Welcome back, <strong> <%- locals.accountData.account_firstname %></strong>  </h2>
@@ -33,7 +33,8 @@
       <h3> Inventory Management:</h3>
       <p>Click here to add, change or delete inventory -> <a href="/inv/"> Inventory management</a></p> 
       <h2>Message Center</h2>
-      <p>You have <%- unreadMessages %> new messages</p>
+      <p>You have <%= unreadMessages %> new messages</p>
+      
     <p> Go to <a href="/messages"> inbox </a></p>
   <% } %>
   

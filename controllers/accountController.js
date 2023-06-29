@@ -118,10 +118,10 @@ async function loggedIn(req, res, next) {
 
   const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
-  const accountData = await accountModel.getAccountById(account_id)
-  const message_to = accountData.account_id
 
-  const unreadMessages = await messageModel.countMessages(message_to)
+  const accountData = await accountModel.getAccountById(account_id)
+  
+  const unreadMessages = await messageModel.countMessages(accountData.account_id)
 
   if (accountData){
   res.render("account/accounthome", {
@@ -129,6 +129,7 @@ async function loggedIn(req, res, next) {
     nav,
     errors: null,
     unreadMessages,
+   
   })}
   else{
         req.flash("notice", "sorry unable to login please try again")
