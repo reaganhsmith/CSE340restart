@@ -43,7 +43,7 @@ async function getMessageInfo(message_to) {
       "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = false",
       [message_to]
     )
-    return messageData.rows
+    return messageData.rows[0]
   } catch (error) {
     console.error("getMessageInfo error: " + error)
   }
@@ -66,7 +66,21 @@ async function getMessageById(message_id) {
 }
 
 
+/* *****************************
+*   Count number of unread messages
+* *************************** */
+async function countArchives(message_to){
+  try{
+    const sql = "SELECT COUNT(message_to) FROM public.message WHERE message_to = $1 AND message_archived = true"
+    return await pool.query(sql, [
+      message_to
+    ])
 
+  }
+  catch(error){
+    return error.message
+  }
+}
 
 
 
@@ -75,5 +89,6 @@ module.exports = {
   sendMessage,
   countMessages,
   getMessageInfo,
-  getMessageById
+  getMessageById,
+  countArchives
   };
