@@ -214,23 +214,23 @@ Util.selectAccount = async function (req, res, next) {
 Util.buildInboxGrid = async function(data){
   let grid = '';
 
-  // if (data.length > 0) {
+  if (data.length > 0) {
     grid += '<table>';
     grid += '<tr> <th>received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>';
 
-    // data.forEach(message => {
-    //   grid += '<tr>';
-    //   grid += '<td>' + message.message_created + '</td>';
-    //   grid += '<td>' + message.message_subject + '</td>';
-    //   grid += '<td>' + message.message_from + '</td>';
-    //   grid += '<td>' + message.message_read + '</td>';
-    //   grid += '</tr>';
-    // });
+    data.forEach(message => {
+      grid += '<tr>';
+      grid += '<td>' + message.message_created.toLocaleString() + '</td>';
+      grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
+      grid += '<td>' + message.message_from + '</td>';
+      grid += '<td>' + message.message_read + '</td>';
+      grid += '</tr>';
+    });
 
     grid += '</table>';
-  // } else {
-  //   grid += '<p class="notice">Sorry, no mail.</p>';
-  // }
+  } else {
+    grid += '<p class="notice">Sorry, no mail.</p>';
+  }
 
   return grid;
 };

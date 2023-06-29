@@ -12,23 +12,22 @@ require("dotenv").config()
  * ************************** */
 async function inboxHome(req, res, next) {
 
-  const account_id = parseInt(req.params.account_id)
+  const account_id = res.locals.accountData.account_id
   let nav = await utilities.getNav()
 
-  const accountData = await accountModel.getAccountById(21)
-  const messageTo = accountData.account_id
-  const messageData = await messageModel.getMessageInfo(messageTo)
-  const messageTable = await utilities.buildInboxGrid(messageTo)
+  const accountData = await accountModel.getAccountById(account_id)
+  const messageData = await messageModel.getMessageInfo(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
 
-  const archivedMessages = await messageModel.countArchives(21)
+  const archivedMessages = await messageModel.countArchives(account_id)
 
       res.render("messages/inbox", {
         title: "Inbox",
         nav,
         errors: null,
-        account_id: messageTo,
-        messageSubject: messageData.message_subject,
+        // account_id: messageTo,
+        // messageSubject: messageData.message_subject,
         messageTable,
         archivedMessages,
       })
@@ -67,12 +66,21 @@ async function newMessage(req, res, next) {
  * ************************** */
 async function archiveMess(req, res, next) {
 
+  const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
+
+  const accountData = await accountModel.getAccountById(account_id)
+  
+  const messageTo = accountData.account_id
+  const messageData = await messageModel.getMessageArchives(messageTo)
+  const messageTable = await utilities.buildInboxGrid(messageTo)
 
       res.render("messages/archives", {
         title: "Archived Messages",
         nav,
         errors: null,
+        account_id: account_id,
+
       })
   
     }

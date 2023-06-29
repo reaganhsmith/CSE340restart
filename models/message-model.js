@@ -23,9 +23,10 @@ async function sendMessage(message_to, message_subject, messsage_body,message_fr
 async function countMessages(message_to){
   try{
     const sql = "SELECT COUNT(message_to) FROM public.message WHERE message_to = $1 AND message_archived = false"
-    return await pool.query(sql, [
+    const countMess = await pool.query(sql, [
       message_to
     ])
+    return countMess.rows[0].count
 
   }
   catch(error){
@@ -43,7 +44,7 @@ async function getMessageInfo(message_to) {
       "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = false",
       [message_to]
     )
-    return messageData.rows[0]
+    return messageData.rows
   } catch (error) {
     console.error("getMessageInfo error: " + error)
   }
@@ -66,15 +67,35 @@ async function getMessageById(message_id) {
 }
 
 
+
+
+/* ***************************
+ *  Get all inventory items and inventory_id and name
+ * ************************** */
+async function getMessageArchives(message_id) {
+  try {
+    const messageData = await pool.query(
+      "SELECT * FROM public.message WHERE message_id = $1 AND message_archived = true",
+      [message_id]
+    )
+    return messageData.rows[0]
+  } catch (error) {
+    console.error("getMessageById error: " + error)
+  }
+}
+
+
+
 /* *****************************
 *   Count number of unread messages
 * *************************** */
 async function countArchives(message_to){
   try{
     const sql = "SELECT COUNT(message_to) FROM public.message WHERE message_to = $1 AND message_archived = true"
-    return await pool.query(sql, [
+    const countArch = await pool.query(sql, [
       message_to
     ])
+    return countArch.rows[0].count
 
   }
   catch(error){
@@ -83,12 +104,12 @@ async function countArchives(message_to){
 }
 
 
-
     // Exporting all functions together
 module.exports = {
   sendMessage,
   countMessages,
   getMessageInfo,
   getMessageById,
-  countArchives
+  countArchives,
+  getMessageArchives
   };

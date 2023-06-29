@@ -4,7 +4,7 @@ const utilities = require('../utilities/index')
 const regValidate = require('../utilities/account-validation')
 
 const accountCont = require('../controllers/accountController')
-const messageCont = require('../controllers/messageController')
+
 
 //accessing the build
 const buildLogin = accountCont.buildLogin
