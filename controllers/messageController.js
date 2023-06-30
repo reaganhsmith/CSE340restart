@@ -157,17 +157,18 @@ async function MessageID(req, res, next) {
     }
 
   const messageSubject = messageData.message_subject
-  const sender_id = messageData.message_from
+  const account_id = messageData.message_from
   const messageBody = messageData.message_body
 
-  const fromData = accountModel.getAccountById(sender_id)
+  const fromData = accountModel.getAccountById(account_id)
   const messageFrom = fromData.account_firstname
+  console.log(messageFrom)
 
   res.render("./messages/message", {
     title: messageSubject,
     nav,
     errors: null,
-    messageFrom: sender_id,
+    messageFrom: account_id,
     messageBody: messageBody,
 
   })
@@ -178,9 +179,12 @@ async function MessageID(req, res, next) {
 /* ***************************
  *  This is the function to delete a message
  * ************************** */
+/* ***************************
+ *  This is the function to send a message
+ * ************************** */
 async function deleteMessage(req, res, next) {
-  
 }
+
 
 
 

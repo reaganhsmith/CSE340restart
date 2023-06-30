@@ -239,6 +239,14 @@ Util.buildInboxGrid = async function(data){
 
 
 
+Util.checkAllLogin = (req, res, next) => {
+  if (res.locals.accountData) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
 
 
 

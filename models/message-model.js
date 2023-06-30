@@ -112,7 +112,7 @@ async function deleteMessage(message_id) {
     const data = await pool.query(sql, [message_id])
   return data
   } catch (error) {
-    new Error("Delete Message Error")
+    new Error("Delete message Error")
   }
 }
 
