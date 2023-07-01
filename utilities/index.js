@@ -219,10 +219,15 @@ Util.buildInboxGrid = async function(data){
     grid += '<tr> <th>received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>';
 
     data.forEach(message => {
+      const message_from = message.message_from
+      const fromName = messageModel.getFromFirst(message_from)
+      
+      const from = fromName.account_firstname
+      console.log(from)
       grid += '<tr>';
       grid += '<td>' + message.message_created.toLocaleString() + '</td>';
       grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
-      grid += '<td>' + message.message_from + '</td>';
+      grid += '<td>' + fromName.account_firstname + '</td>';
       grid += '<td>' + message.message_read + '</td>';
       grid += '</tr>';
     });

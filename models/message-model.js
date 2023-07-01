@@ -22,7 +22,7 @@ async function sendMessage(message_to, message_subject, messsage_body,message_fr
 * *************************** */
 async function countMessages(message_to){
   try{
-    const sql = "SELECT COUNT(message_to) FROM public.message WHERE message_to = $1 AND message_archived = false"
+    const sql = "SELECT COUNT(message_to) FROM public.message WHERE message_to = $1 AND message_archived = false AND message_read = false"
     const countMess = await pool.query(sql, [
       message_to
     ])
@@ -117,6 +117,41 @@ async function deleteMessage(message_id) {
 }
 
 
+
+/* *****************************
+*   Get who the message is from
+* *************************** */
+async function getFromFN(message_from) {
+  try {
+    const messageData = await pool.query(
+      "SELECT account_firstname FROM account a JOIN linkinfo l ON l.account_id = a.account_id JOIN message m ON m.message_from = a.account_id WHERE m.message_from = $1",
+      [message_from]
+    )
+    return messageData.rows[0]
+  } catch (error) {
+    console.error("getMessageInfo error: " + error)
+  }
+}
+
+
+/* *****************************
+*   Get who the message is from
+* *************************** */
+async function getFromFirst(message_from) {
+  try {
+    const messageData = await pool.query(
+      "SELECT account_firstname FROM account a JOIN linkinfo l ON l.account_id = a.account_id JOIN message m ON m.message_from = a.account_id WHERE m.message_from = $1",
+      [message_from]
+    )
+    return messageData.rows
+  } catch (error) {
+    console.error("getMessageInfo error: " + error)
+  }
+}
+
+
+
+
     // Exporting all functions together
 module.exports = {
   sendMessage,
@@ -125,5 +160,7 @@ module.exports = {
   getMessageById,
   countArchives,
   getMessageArchives,
-  deleteMessage
+  deleteMessage,
+  getFromFN,
+  getFromFirst
   };

@@ -103,3 +103,10 @@ UPDATE public.message SET message_archived = true WHERE message_id = 4 RETURNING
 DELETE FROM public.message WHERE message_id = 6
 
 UPDATE public.message SET message_read = true WHERE message_id = 4 RETURNING *
+
+-- Get the from persons first name
+SELECT account_firstname
+FROM account a
+JOIN linkinfo l ON l.account_id = a.account_id
+JOIN message m ON m.message_from = a.account_id
+WHERE m.message_from = 21;

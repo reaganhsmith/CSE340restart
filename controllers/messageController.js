@@ -21,12 +21,14 @@ async function inboxHome(req, res, next) {
 
   const archivedMessages = await messageModel.countArchives(account_id)
 
+  const message_from = messageData.message_from
+  const fromName = await messageModel.getFromFN(message_from)
+  console.log(fromName)
+
       res.render("messages/inbox", {
         title: "Inbox",
         nav,
         errors: null,
-        // account_id: messageTo,
-        // messageSubject: messageData.message_subject,
         messageTable,
         archivedMessages,
       })
@@ -157,18 +159,16 @@ async function MessageID(req, res, next) {
     }
 
   const messageSubject = messageData.message_subject
-  const account_id = messageData.message_from
   const messageBody = messageData.message_body
 
-  const fromData = accountModel.getAccountById(account_id)
-  const messageFrom = fromData.account_firstname
-  console.log(messageFrom)
+  const message_from = messageData.message_from
+  const fromName = await messageModel.getFromFN(message_from)
 
   res.render("./messages/message", {
     title: messageSubject,
     nav,
     errors: null,
-    messageFrom: account_id,
+    messageFrom: fromName.account_firstname,
     messageBody: messageBody,
 
   })
@@ -178,9 +178,6 @@ async function MessageID(req, res, next) {
 
 /* ***************************
  *  This is the function to delete a message
- * ************************** */
-/* ***************************
- *  This is the function to send a message
  * ************************** */
 async function deleteMessage(req, res, next) {
 }
