@@ -220,7 +220,7 @@ Util.buildInboxGrid = async function(data){
 
     data.forEach(message => {
       const message_from = message.message_from
-      const fromName = messageModel.getFromFirst(message_from)
+      const fromName = messageModel.getFromFN(message_from)
       
       const from = fromName.account_firstname
       console.log(from)
