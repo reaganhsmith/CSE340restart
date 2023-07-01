@@ -35,6 +35,10 @@ router.post("/delete",
 utilities.checkAllLogin,
 utilities.handleErrors(messageCont.deleteMessage))
 
+//Route to build registration page 
+router.post("/newMessage",
+utilities.checkAllLogin,
+ utilities.handleErrors(messageCont.newMessage)) 
 
 // Export both routers
 module.exports = router;

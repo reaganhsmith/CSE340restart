@@ -23,7 +23,7 @@ async function inboxHome(req, res, next) {
 
   const message_from = messageData.message_from
   const fromName = await messageModel.getFromFN(message_from)
-  console.log(fromName)
+
 
       res.render("messages/inbox", {
         title: "Inbox",
@@ -145,7 +145,8 @@ async function sentMessage(req, res, next) {
  * ************************** */
 async function MessageID(req, res, next) {
   let nav = await utilities.getNav()
-  const message_id = req.params.message_id
+  const message_id = parseInt(req.params.message_id)
+
 
   const messageData = await messageModel.getMessageById(message_id)
 
@@ -170,7 +171,7 @@ async function MessageID(req, res, next) {
     errors: null,
     messageFrom: fromName.account_firstname,
     messageBody: messageBody,
-
+    message_id,
   })
 }
 
@@ -180,7 +181,65 @@ async function MessageID(req, res, next) {
  *  This is the function to delete a message
  * ************************** */
 async function deleteMessage(req, res, next) {
+  let nav = await utilities.getNav()
+
+  const {
+    message_id
+  } = req.body
+
+  const messageResults = await messageModel.deleteMessage(
+    message_id
+  )
+
+
+
+
+  const account_id = res.locals.accountData.account_id
+  const sentAccountData = await accountModel.getAccountById(account_id)
+  const accountName = sentAccountData.account_firstname
+
+  
+
+  const messageData = await messageModel.getMessageInfo(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
+  const archivedMessages = await messageModel.countArchives(account_id)
+
+
+  if(messageResults){
+    req.flash(
+      "notice",
+      `Message Deleted!`
+    )
+    res.render("messages/inbox", {
+      title: "Inbox",
+      nav,
+      errors: null,
+      messageTable,
+      archivedMessages,
+    })
+  } else{
+    req.flash("notice", "sorry unable to delete message")
+
+
+      const messageInfo = await messageModel.getMessageById(message_id)
+      const messageSubject = messageInfo.message_subject
+      const messageBody = messageInfo.message_body
+
+      const message_from = messageInfo.message_from
+      const fromName = await messageModel.getFromFN(message_from)
+
+    res.status(501).render("./messages/message", {
+      title: messageSubject,
+      nav,
+      errors: null,
+      messageFrom: fromName.account_firstname,
+      messageBody: messageBody,
+    })
+  }
 }
+
+
+
 
 
 

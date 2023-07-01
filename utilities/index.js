@@ -223,7 +223,7 @@ Util.buildInboxGrid = async function(data){
       const fromName = messageModel.getFromFN(message_from)
       
       const from = fromName.account_firstname
-      console.log(from)
+
       grid += '<tr>';
       grid += '<td>' + message.message_created.toLocaleString() + '</td>';
       grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
