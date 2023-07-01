@@ -134,20 +134,6 @@ async function getFromFN(message_from) {
 }
 
 
-/* *****************************
-*   Get who the message is from
-* *************************** */
-async function getFromFirst(message_from) {
-  try {
-    const messageData = await pool.query(
-      "SELECT account_firstname FROM account a JOIN linkinfo l ON l.account_id = a.account_id JOIN message m ON m.message_from = a.account_id WHERE m.message_from = $1",
-      [message_from]
-    )
-    return messageData.rows
-  } catch (error) {
-    console.error("getMessageInfo error: " + error)
-  }
-}
 
 
 
@@ -162,5 +148,4 @@ module.exports = {
   getMessageArchives,
   deleteMessage,
   getFromFN,
-  getFromFirst
   };
