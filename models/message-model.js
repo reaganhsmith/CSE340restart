@@ -135,6 +135,32 @@ async function getFromFN(message_from) {
 
 
 
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function archiveMessage(message_id) {
+  try {
+    const sql = 'UPDATE public.message SET message_archived = true WHERE message_id = $1 RETURNING *'
+    const data = await pool.query(sql, [message_id])
+  return data
+  } catch (error) {
+    new Error("Delete message Error")
+  }
+}
+
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function readMessage(message_id) {
+  try {
+    const sql = 'UPDATE public.message SET message_read = true WHERE message_id = $1 RETURNING *'
+    const data = await pool.query(sql, [message_id])
+  return data
+  } catch (error) {
+    new Error("Delete message Error")
+  }
+}
 
 
 
@@ -148,4 +174,6 @@ module.exports = {
   getMessageArchives,
   deleteMessage,
   getFromFN,
+  archiveMessage,
+  readMessage
   };

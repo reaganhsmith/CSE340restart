@@ -213,9 +213,10 @@ Util.selectAccount = async function (req, res, next) {
 * ************************************ */
 Util.buildInboxGrid = async function(data){
   let grid = '';
+  
 
   if (data.length > 0) {
-    grid += '<table>';
+    grid += '<table class="messageTable">';
     grid += '<tr> <th>received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>';
 
     data.forEach(message => {

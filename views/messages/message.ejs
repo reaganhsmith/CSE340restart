@@ -29,7 +29,7 @@
 <form>
 <button formaction="/messages/newMessage" formmethod="post"> Reply </button>
 <button formaction="/messages/read" formmethod="post"> Mark as Read </button>
-<button formaction="/message/archive" formmethod="post"> Mark as Archive </button>
+<button formaction="/messages/archive" formmethod="post"> Mark as Archive </button>
 <button formaction="/messages/delete" formmethod="post"> Delete Message </button>
 <input type="hidden" name="message_id"<% if(locals.accountData) { %> value="<%= message_id %>" <% } %> >
 </form>

@@ -40,6 +40,17 @@ router.post("/newMessage",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.newMessage)) 
 
+ //Route to build registration page 
+router.post("/archive",
+utilities.checkAllLogin,
+ utilities.handleErrors(messageCont.archiveMessage)) 
+
+
+//Route to build registration page 
+router.post("/read",
+utilities.checkAllLogin,
+ utilities.handleErrors(messageCont.readMessage)) 
+
 // Export both routers
 module.exports = router;
 
