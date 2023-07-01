@@ -238,7 +238,130 @@ async function deleteMessage(req, res, next) {
   }
 }
 
+/* ***************************
+ *  This is the function to archive a message
+ * ************************** */
+async function archiveMessage(req, res, next) {
+  let nav = await utilities.getNav()
 
+  const {
+    message_id
+  } = req.body
+
+  const messageResults = await messageModel.archiveMessage(
+    message_id
+  )
+
+
+
+
+  const account_id = res.locals.accountData.account_id
+  const sentAccountData = await accountModel.getAccountById(account_id)
+  const accountName = sentAccountData.account_firstname
+
+  
+
+  const messageData = await messageModel.getMessageInfo(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
+  const archivedMessages = await messageModel.countArchives(account_id)
+
+
+  if(messageResults){
+    req.flash(
+      "notice",
+      `Message archived!`
+    )
+    res.render("messages/inbox", {
+      title: "Inbox",
+      nav,
+      errors: null,
+      messageTable,
+      archivedMessages,
+    })
+  } else{
+    req.flash("notice", "sorry unable to delete message")
+
+
+      const messageInfo = await messageModel.getMessageById(message_id)
+      const messageSubject = messageInfo.message_subject
+      const messageBody = messageInfo.message_body
+
+      const message_from = messageInfo.message_from
+      const fromName = await messageModel.getFromFN(message_from)
+
+    res.status(501).render("./messages/message", {
+      title: messageSubject,
+      nav,
+      errors: null,
+      messageFrom: fromName.account_firstname,
+      messageBody: messageBody,
+    })
+  }
+}
+
+
+
+
+/* ***************************
+ *  This is the function to read a message
+ * ************************** */
+async function readMessage(req, res, next) {
+  let nav = await utilities.getNav()
+
+  const {
+    message_id
+  } = req.body
+
+  const messageResults = await messageModel.readMessage(
+    message_id
+  )
+
+
+
+
+  const account_id = res.locals.accountData.account_id
+  const sentAccountData = await accountModel.getAccountById(account_id)
+  const accountName = sentAccountData.account_firstname
+
+  
+
+  const messageData = await messageModel.getMessageInfo(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
+  const archivedMessages = await messageModel.countArchives(account_id)
+
+
+  if(messageResults){
+    req.flash(
+      "notice",
+      `Message marked as read!`
+    )
+    res.render("messages/inbox", {
+      title: "Inbox",
+      nav,
+      errors: null,
+      messageTable,
+      archivedMessages,
+    })
+  } else{
+    req.flash("notice", "sorry unable to delete message")
+
+
+      const messageInfo = await messageModel.getMessageById(message_id)
+      const messageSubject = messageInfo.message_subject
+      const messageBody = messageInfo.message_body
+
+      const message_from = messageInfo.message_from
+      const fromName = await messageModel.getFromFN(message_from)
+
+    res.status(501).render("./messages/message", {
+      title: messageSubject,
+      nav,
+      errors: null,
+      messageFrom: fromName.account_firstname,
+      messageBody: messageBody,
+    })
+  }
+}
 
 
 
@@ -251,5 +374,7 @@ module.exports = {
   archiveMess,
   sentMessage,
   MessageID,
-  deleteMessage
+  deleteMessage,
+  archiveMessage,
+  readMessage
 }
