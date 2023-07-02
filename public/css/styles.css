@@ -512,6 +512,34 @@ span{
 #passwordChange{
   margin-top: 2rem;
 }
+
+
+/*Message table */
+.messageTable tbody tr:nth-of-type(2n){
+  background-color: var(--main-color)
+}
+.messageTable{
+   border-collapse: collapse;
+    margin: 25px 0;
+    font-size:1rem;
+    font-family: var(--main-font);
+    min-width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.messageTable td{
+  padding: 1rem;
+}
+
+.messageTable tr{
+  text-align: center;
+}
+
+textarea{
+  font-family: var(--main-font);
+}
+
+
   
 /* MEDIA QUERY SECTION */
 
@@ -655,4 +683,9 @@ span{
   font-family: var(--main-font);
   font-size: 18px;
 }
+
+.messageTable{
+  width: 750px;
+margin-left: 2rem}
+
 }
