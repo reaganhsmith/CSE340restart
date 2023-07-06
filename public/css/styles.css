@@ -106,6 +106,9 @@ h1{
   margin-left: 2rem;
 }
 
+
+
+
 p{
   font-family: var(--main-font);
 }
@@ -524,7 +527,6 @@ span{
     font-size:1rem;
     font-family: var(--main-font);
     min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .messageTable td{
@@ -539,6 +541,34 @@ textarea{
   font-family: var(--main-font);
 }
 
+.messageHeader{
+  margin-left: 2rem;
+}
+
+.messageDetails{
+  margin-left: 2rem;
+  font-size: 1.2rem;
+}
+
+
+.messageSub{
+  border-top: solid 3px var(--dark-color);
+  padding: 0 1rem 1rem 2rem;
+  margin-left: -2rem;
+  margin-bottom: 1rem;
+}
+
+.messageOpt{
+  border-top: solid 3px var(--dark-color);
+  padding: 0 1rem 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.messageOpt form{
+  background-color: transparent;
+  box-shadow: none;
+  
+}
 
   
 /* MEDIA QUERY SECTION */
@@ -686,6 +716,21 @@ textarea{
 
 .messageTable{
   width: 750px;
-margin-left: 2rem}
+margin-left: 2rem;
+font-size: 1.3rem;}
+
+.messageOpt form button{
+  width: 15rem;
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+.messageOpt{
+  width: 100%;
+}
+
+.messageOpt form{
+  flex-direction: row;
+}
 
 }

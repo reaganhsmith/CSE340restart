@@ -20,13 +20,15 @@
 <div class="messageDetails">
   <p><strong> Subject: </strong> <%- title %></p>
   <p> <strong> From: </strong> <%- messageFrom %> </p>
+  <div class="messageSub">
   <p><strong>Body:</strong></p>
-  <p> <%- messageBody %> </p>
+  <p> <%- messageBody %> </p></div>
 </div>
 
 <div class="messageOpt">
-<a href="/messages"> Return to Inbox</a>
+
 <form>
+  <button formaction="/messages" formmethod="post">Return to inbox</button>
 <button formaction="/messages/newMessage" formmethod="post"> Reply </button>
 <button formaction="/messages/read" formmethod="post"> Mark as Read </button>
 <button formaction="/messages/archive" formmethod="post"> Mark as Archive </button>

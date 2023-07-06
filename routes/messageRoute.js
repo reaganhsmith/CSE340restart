@@ -51,6 +51,11 @@ router.post("/read",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.readMessage)) 
 
+ //Route to build registration page 
+router.post("/",
+utilities.checkAllLogin,
+ utilities.handleErrors(messageCont.inboxHome)) 
+
 // Export both routers
 module.exports = router;
 
