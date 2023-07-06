@@ -11,7 +11,7 @@
   --main-font: 'Mukta', sans-serif;
   --main-color: #b5d3e9;
   --dark-color: #195380;
-  --dark-pink: #b85b7c;
+  --dark-pink: #742541;
   --light-pink: #a04674;
 
 }
@@ -91,7 +91,7 @@ nav a:hover{
 }
 
 nav ul li:visited{
-  color: #b85b7c;
+  color: var(--dark-pink);
 }
 /*----------- MAIN SECTION OF THE PAGE -----------*/
 
@@ -364,7 +364,7 @@ font-size: 18px;
   font-size: 1.2rem;
 }
 .accountManage a:visited{
-  color: var(--light-pink);
+  color: var(--dark-pink);
 }
 
 /* LOGIN FORM STYLE */
