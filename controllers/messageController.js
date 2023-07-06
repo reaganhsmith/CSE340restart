@@ -21,7 +21,7 @@ async function inboxHome(req, res, next) {
 
 
   const archivedMessages = await messageModel.countArchives(account_id)
-  console.log("info " + sentFrom.message_from)
+
   const message_from = sentFrom.message_from
   const firstName = await messageModel.getFromFN(message_from)
   const messageTable = await utilities.buildInboxGrid(messageData)
