@@ -24,7 +24,7 @@ async function inboxHome(req, res, next) {
   console.log("info " + sentFrom.message_from)
   const message_from = sentFrom.message_from
   const firstName = await messageModel.getFromFN(message_from)
-  const messageTable = await utilities.buildInboxGrid(messageData, firstName)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
       res.render("messages/inbox", {
         title: "Inbox",

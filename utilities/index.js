@@ -214,7 +214,6 @@ Util.selectAccount = async function (req, res, next) {
 Util.buildInboxGrid = async function(data){
   let grid = '';
   
-
   if (data.length > 0) {
     grid += '<table class="messageTable">';
     grid += '<tr> <th>received</th> <th>Subject</th> <th>From</th> <th>Read</th> </tr>';
@@ -225,7 +224,10 @@ Util.buildInboxGrid = async function(data){
       grid += '<tr>';
       grid += '<td>' + message.message_created.toLocaleString() + '</td>';
       grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
-      grid += '<td>' + "manager" + '</td>';
+
+      const firstName = messageModel.getFromFN(message.message_from)
+      
+      grid += '<td>' + firstName + '</td>';
       grid += '<td>' + message.message_read + '</td>';
       // grid += '<td>' + firstName.account_firstname + '</td>';
       

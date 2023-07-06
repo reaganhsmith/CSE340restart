@@ -172,7 +172,7 @@ async function getSender(message_to) {
       "SELECT message_from FROM message WHERE message_to = $1",
       [message_to]
     )
-    return messageData.rows[0]
+    return messageData.rows
     
   } catch (error) {
     console.error("getMessageById error: " + error)
