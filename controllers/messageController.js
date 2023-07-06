@@ -16,14 +16,15 @@ async function inboxHome(req, res, next) {
   let nav = await utilities.getNav()
   const account_id = res.locals.accountData.account_id
   const messageData = await messageModel.getMessageInfo(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
+  const sentFrom = await messageModel.getSender(account_id)
+  
 
 
   const archivedMessages = await messageModel.countArchives(account_id)
-
-  const message_from = messageData.message_from
-  const fromName = await messageModel.getFromFN(message_from)
-
+  console.log("info " + sentFrom.message_from)
+  const message_from = sentFrom.message_from
+  const firstName = await messageModel.getFromFN(message_from)
+  const messageTable = await utilities.buildInboxGrid(messageData, firstName)
 
       res.render("messages/inbox", {
         title: "Inbox",
@@ -106,7 +107,7 @@ async function sentMessage(req, res, next) {
   )
 
   const sentAccountData = await accountModel.getAccountById(message_to)
-  const accountName = sentAccountData.account_firstname
+
 
   const account_id = res.locals.accountData.account_id
 
@@ -118,7 +119,7 @@ async function sentMessage(req, res, next) {
   if(messageResults){
     req.flash(
       "notice",
-      `Congratulations, you sent a message to ${accountName}!`
+      `Congratulations, you sent a message!`
     )
     res.render("messages/inbox", {
       title: "Inbox",
@@ -191,14 +192,10 @@ async function deleteMessage(req, res, next) {
     message_id
   )
 
-
-
-
   const account_id = res.locals.accountData.account_id
-  const sentAccountData = await accountModel.getAccountById(account_id)
-  const accountName = sentAccountData.account_firstname
 
-  
+  // const sentAccountData = await accountModel.getAccountById(account_id)
+  // const accountName = sentAccountData.account_firstname
 
   const messageData = await messageModel.getMessageInfo(account_id)
   const messageTable = await utilities.buildInboxGrid(messageData)
@@ -219,7 +216,6 @@ async function deleteMessage(req, res, next) {
     })
   } else{
     req.flash("notice", "sorry unable to delete message")
-
 
       const messageInfo = await messageModel.getMessageById(message_id)
       const messageSubject = messageInfo.message_subject

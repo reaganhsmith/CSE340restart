@@ -163,6 +163,24 @@ async function readMessage(message_id) {
 }
 
 
+/* ***************************
+ *  Get all sender_from info
+ * ************************** */
+async function getSender(message_to) {
+  try {
+    const messageData = await pool.query(
+      "SELECT message_from FROM message WHERE message_to = $1",
+      [message_to]
+    )
+    return messageData.rows[0]
+    
+  } catch (error) {
+    console.error("getMessageById error: " + error)
+  }
+}
+
+
+
 
     // Exporting all functions together
 module.exports = {
@@ -175,5 +193,6 @@ module.exports = {
   deleteMessage,
   getFromFN,
   archiveMessage,
-  readMessage
+  readMessage,
+  getSender
   };
