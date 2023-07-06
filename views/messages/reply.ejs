@@ -1,0 +1,44 @@
+<!-- THE CONTENT HEADING -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<!-- Messages or error mesages  -->
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  <div class="messageDetails">
+    <p><strong> Subject: </strong> <%- title %></p>
+    <p> <strong> From: </strong> <%- messageFrom %> </p>
+    <div class="messageSub">
+    <p><strong>Body:</strong></p>
+    <p> <%- messageBody %> </p></div>
+  </div>
+
+
+  <form id="sendMessage" action="/messages/sent" method="post">
+
+    <%- accountSelect %>
+  
+    <label for="subject">Subject</label> 
+    <input type="text" id="subject" name="message_subject" required>
+  
+    <label for="message">Message:</label>
+    <textarea id="message" name="message_body" rows="4" cols="50" required></textarea>
+  
+  
+    <button type="submit" value="Send Message"> Submit</button>
+  
+    <input type="hidden" name="message_from"<% if(locals.accountData) { %> value="<%= locals.accountData.account_id %>" <% } %> >
+  </form>
+  
+  <a href="/messages"> Return to Inbox</a>

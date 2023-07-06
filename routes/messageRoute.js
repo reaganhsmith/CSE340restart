@@ -36,9 +36,9 @@ utilities.checkAllLogin,
 utilities.handleErrors(messageCont.deleteMessage))
 
 //Route to build registration page 
-router.post("/newMessage",
+router.post("/reply/:message_id",
 utilities.checkAllLogin,
- utilities.handleErrors(messageCont.newMessage)) 
+ utilities.handleErrors(messageCont.reply)) 
 
  //Route to build registration page 
 router.post("/archive",

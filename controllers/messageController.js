@@ -160,6 +160,8 @@ async function MessageID(req, res, next) {
       });
     }
 
+  const replyLink = `/messages/reply/${messageData.message_id}`
+  console.log(replyLink)
   const messageSubject = messageData.message_subject
   const messageBody = messageData.message_body
 
@@ -173,6 +175,7 @@ async function MessageID(req, res, next) {
     messageFrom: fromName.account_firstname,
     messageBody: messageBody,
     message_id,
+    replyLink
   })
 }
 
@@ -360,6 +363,46 @@ async function readMessage(req, res, next) {
 }
 
 
+/* ***************************
+ *  This is the function to build the inbox page
+ * ************************** */
+async function reply(req, res, next) {
+  const message_id = parseInt(req.params.message_id)
+  let nav = await utilities.getNav()
+  const account_id = res.locals.accountData.account_id
+
+  const messageData = await messageModel.getMessageById(message_id)
+
+  if (!messageData) {
+      req.flash('error', 'That message does not exist');
+      return res.status(400).render('messages/inbox', {
+        title: 'Inbox',
+        nav,
+        errors: null,
+      });
+    }
+
+  const messageSubject = messageData.message_subject
+  const messageBody = messageData.message_body
+
+  const accountSelect = await utilities.selectAccount()
+
+  const message_from = messageData.message_from
+  const fromName = await messageModel.getFromFN(message_from)
+
+      res.render("messages/reply", {
+        title: "Reply",
+        nav,
+        errors: null,
+        messageFrom: fromName.account_firstname,
+        messageBody: messageBody,
+        accountSelect,
+        account_id: account_id,
+
+      })
+    }
+
+
 
 
 
@@ -372,5 +415,6 @@ module.exports = {
   MessageID,
   deleteMessage,
   archiveMessage,
-  readMessage
+  readMessage,
+  reply
 }
