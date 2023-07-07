@@ -225,28 +225,9 @@ Util.buildInboxGrid = async function(data){
       grid += '<td>' + message.message_created.toLocaleString() + '</td>';
       grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
 
-      const firstName = messageModel.getFromFN(message.message_from)
-      .then((user) => {
-        return user.account_firstname;
-      });
-
-      const printName = async () => {
-        const fname = await firstName;
-        return fname
-      };
-
-
-      printName().then((fname) => {
-        console.log("names: " + fname);
-        grid += '<td>' + fname + '</td>';
-      });
-      
-      printName();
-     
-
-      
+       grid += '<td>' + message.account_firstname + '</td>';
       grid += '<td>' + message.message_read + '</td>';
-      // grid += '<td>' + firstName.account_firstname + '</td>';
+     
       
       grid += '</tr>';
     });

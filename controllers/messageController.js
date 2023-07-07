@@ -15,15 +15,9 @@ async function inboxHome(req, res, next) {
   
   let nav = await utilities.getNav()
   const account_id = res.locals.accountData.account_id
-  const messageData = await messageModel.getMessageInfo(account_id)
-  const sentFrom = await messageModel.getSender(account_id)
-  
-
+  const messageData = await messageModel.getSender(account_id)
 
   const archivedMessages = await messageModel.countArchives(account_id)
-
-  const message_from = sentFrom.message_from
-  const firstName = await messageModel.getFromFN(message_from)
   const messageTable = await utilities.buildInboxGrid(messageData)
 
       res.render("messages/inbox", {

@@ -170,7 +170,7 @@ async function readMessage(message_id) {
 async function getSender(message_to) {
   try {
     const messageData = await pool.query(
-      "SELECT message_from FROM message WHERE message_to = $1",
+      "SELECT m.message_subject, m.message_id, m.message_created, m.message_from, m.message_read, a.account_firstname FROM message m JOIN linkinfo l ON l.message_from = m.message_from JOIN account a ON a.account_id = l.account_id WHERE message_to = $1 AND message_archived = false;",
       [message_to]
     )
     return messageData.rows
