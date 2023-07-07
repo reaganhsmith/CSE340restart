@@ -19,7 +19,7 @@
 
 <div class="messageDetails">
   <p><strong> Subject: </strong> <%- title %></p>
-  <p> <strong> From: </strong> <%- messageFrom %> </p>
+  <p> <strong> From: </strong> <%- fromName %> </p>
   <div class="messageSub">
   <p><strong>Body:</strong></p>
   <p> <%- messageBody %> </p></div>
@@ -30,7 +30,12 @@
 <form>
   <button formaction="/messages" formmethod="post">Return to inbox</button>
 <button formaction="<%- replyLink %>" formmethod="post"> Reply </button>
-<button formaction="/messages/read" formmethod="post"> Mark as Read </button>
+<% if (!messageRead){ %>
+ <button formaction="/messages/read" formmethod="post"> Mark as READ </button> 
+<% }else{ %>
+  <button formaction="/messages/unread" formmethod="post"> Mark as UNREAD </button> 
+<% } %>
+
 <button formaction="/messages/archive" formmethod="post"> Mark as Archive </button>
 <button formaction="/messages/delete" formmethod="post"> Delete Message </button>
 <input type="hidden" name="message_id"<% if(locals.accountData) { %> value="<%= message_id %>" <% } %> >

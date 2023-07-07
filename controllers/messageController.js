@@ -62,20 +62,16 @@ async function newMessage(req, res, next) {
  * ************************** */
 async function archiveMess(req, res, next) {
   let nav = await utilities.getNav()
-
   const account_id = res.locals.accountData.account_id
-
   const messageData = await messageModel.getMessageArchives(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
 
   const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
       res.render("messages/archives", {
         title: "Archives",
         nav,
         errors: null,
-        // account_id: messageTo,
-        // messageSubject: messageData.message_subject,
         messageTable,
         archivedMessages,
       })
@@ -100,14 +96,14 @@ async function sentMessage(req, res, next) {
     message_from
   )
 
-  const sentAccountData = await accountModel.getAccountById(message_to)
 
 
   const account_id = res.locals.accountData.account_id
 
-  const messageData = await messageModel.getMessageInfo(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
+  const messageData = await messageModel.getSender(account_id)
   const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
+
 
 
   if(messageResults){
@@ -142,34 +138,31 @@ async function MessageID(req, res, next) {
   let nav = await utilities.getNav()
   const message_id = parseInt(req.params.message_id)
 
-
+  const account_id = res.locals.accountData.account_id
   const messageData = await messageModel.getMessageById(message_id)
 
-  if (!messageData) {
-      req.flash('error', 'That message does not exist');
-      return res.status(400).render('messages/inbox', {
-        title: 'Inbox',
-        nav,
-        errors: null,
-      });
-    }
 
   const replyLink = `/messages/reply/${messageData.message_id}`
-  console.log(replyLink)
+
   const messageSubject = messageData.message_subject
   const messageBody = messageData.message_body
+  
+  const messageRead = messageData.message_read
+  console.log(messageRead)
 
-  const message_from = messageData.message_from
-  const fromName = await messageModel.getFromFN(message_from)
+  const messageFrom = messageData.message_from
+  
+  const fromName = await messageModel.getFromFN(messageFrom)
 
   res.render("./messages/message", {
     title: messageSubject,
     nav,
     errors: null,
-    messageFrom: fromName.account_firstname,
+    fromName: fromName.account_firstname,
     messageBody: messageBody,
     message_id,
-    replyLink
+    replyLink, 
+    messageRead: messageRead,
   })
 }
 
@@ -191,12 +184,10 @@ async function deleteMessage(req, res, next) {
 
   const account_id = res.locals.accountData.account_id
 
-  // const sentAccountData = await accountModel.getAccountById(account_id)
-  // const accountName = sentAccountData.account_firstname
 
-  const messageData = await messageModel.getMessageInfo(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
+  const messageData = await messageModel.getSender(account_id)
   const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
 
   if(messageResults){
@@ -245,18 +236,10 @@ async function archiveMessage(req, res, next) {
     message_id
   )
 
-
-
-
   const account_id = res.locals.accountData.account_id
-  const sentAccountData = await accountModel.getAccountById(account_id)
-  const accountName = sentAccountData.account_firstname
-
-  
-
-  const messageData = await messageModel.getMessageInfo(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
+  const messageData = await messageModel.getSender(account_id)
   const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
 
   if(messageResults){
@@ -309,18 +292,11 @@ async function readMessage(req, res, next) {
     message_id
   )
 
-
-
-
   const account_id = res.locals.accountData.account_id
-  const sentAccountData = await accountModel.getAccountById(account_id)
-  const accountName = sentAccountData.account_firstname
 
-  
-
-  const messageData = await messageModel.getMessageInfo(account_id)
-  const messageTable = await utilities.buildInboxGrid(messageData)
+  const messageData = await messageModel.getSender(account_id)
   const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
 
 
   if(messageResults){
@@ -396,7 +372,59 @@ async function reply(req, res, next) {
       })
     }
 
+/* ***************************
+ *  This is the function to unread a message
+ * ************************** */
+async function unreadMessage(req, res, next) {
+  let nav = await utilities.getNav()
 
+  const {
+    message_id
+  } = req.body
+
+  const messageResults = await messageModel.unreadMessage(
+    message_id
+  )
+
+  const account_id = res.locals.accountData.account_id
+
+  const messageData = await messageModel.getSender(account_id)
+  const archivedMessages = await messageModel.countArchives(account_id)
+  const messageTable = await utilities.buildInboxGrid(messageData)
+
+
+  if(messageResults){
+    req.flash(
+      "notice",
+      `Message marked as read!`
+    )
+    res.render("messages/inbox", {
+      title: "Inbox",
+      nav,
+      errors: null,
+      messageTable,
+      archivedMessages,
+    })
+  } else{
+    req.flash("notice", "sorry unable to delete message")
+
+
+      const messageInfo = await messageModel.getMessageById(message_id)
+      const messageSubject = messageInfo.message_subject
+      const messageBody = messageInfo.message_body
+
+      const message_from = messageInfo.message_from
+      const fromName = await messageModel.getFromFN(message_from)
+
+    res.status(501).render("./messages/message", {
+      title: messageSubject,
+      nav,
+      errors: null,
+      messageFrom: fromName.account_firstname,
+      messageBody: messageBody,
+    })
+  }
+}
 
 
 
@@ -410,5 +438,6 @@ module.exports = {
   deleteMessage,
   archiveMessage,
   readMessage,
-  reply
+  reply,
+  unreadMessage
 }

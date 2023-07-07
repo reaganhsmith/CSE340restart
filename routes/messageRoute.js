@@ -35,23 +35,29 @@ router.post("/delete",
 utilities.checkAllLogin,
 utilities.handleErrors(messageCont.deleteMessage))
 
-//Route to build registration page 
+//Route to message page 
 router.post("/reply/:message_id",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.reply)) 
 
- //Route to build registration page 
+ //Route to archive post 
 router.post("/archive",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.archiveMessage)) 
 
 
-//Route to build registration page 
+//Route to read post 
 router.post("/read",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.readMessage)) 
 
- //Route to build registration page 
+
+ //Route to unread post 
+router.post("/unread",
+utilities.checkAllLogin,
+ utilities.handleErrors(messageCont.unreadMessage)) 
+
+ //Route to build inbox home post
 router.post("/",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.inboxHome)) 

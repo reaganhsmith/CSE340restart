@@ -75,7 +75,7 @@ async function getMessageById(message_id) {
 async function getMessageArchives(message_to) {
   try {
     const messageData = await pool.query(
-      "SELECT * FROM public.message WHERE message_to = $1 AND message_archived = true",
+      "SELECT m.message_subject, m.message_id, m.message_created, m.message_from, m.message_read, a.account_firstname FROM message m JOIN linkinfo l ON l.message_from = m.message_from JOIN account a ON a.account_id = l.account_id WHERE message_to = $1 AND message_archived = true",
       [message_to]
     )
     return messageData.rows
@@ -151,7 +151,7 @@ async function archiveMessage(message_id) {
 
 
 /* ***************************
- *  Delete Inventory Item
+ * read message
  * ************************** */
 async function readMessage(message_id) {
   try {
@@ -181,6 +181,19 @@ async function getSender(message_to) {
 }
 
 
+/* ***************************
+ *  unread a message
+ * ************************** */
+async function unreadMessage(message_id) {
+  try {
+    const sql = 'UPDATE public.message SET message_read = false WHERE message_id = $1 RETURNING *'
+    const data = await pool.query(sql, [message_id])
+  return data
+  } catch (error) {
+    new Error("Delete message Error")
+  }
+}
+
 
 
     // Exporting all functions together
@@ -195,5 +208,6 @@ module.exports = {
   getFromFN,
   archiveMessage,
   readMessage,
-  getSender
+  getSender,
+  unreadMessage
   };
