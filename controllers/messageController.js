@@ -148,7 +148,7 @@ async function MessageID(req, res, next) {
   const messageBody = messageData.message_body
   
   const messageRead = messageData.message_read
-  console.log(messageRead)
+
 
   const messageFrom = messageData.message_from
   
