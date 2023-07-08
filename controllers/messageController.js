@@ -298,12 +298,22 @@ async function readMessage(req, res, next) {
   const archivedMessages = await messageModel.countArchives(account_id)
   const messageTable = await utilities.buildInboxGrid(messageData)
 
-
+  const messageInfo = await messageModel.getMessageById(message_id)
+console.log(messageInfo.message_read)
   if(messageResults){
-    req.flash(
+
+    if(messageInfo.message_read == true){
+     req.flash(
       "notice",
       `Message marked as read!`
-    )
+    ) 
+    }else{
+      req.flash(
+        "notice",
+        `Message marked as unread!`
+      ) 
+    }
+    
     res.render("messages/inbox", {
       title: "Inbox",
       nav,
@@ -312,7 +322,7 @@ async function readMessage(req, res, next) {
       archivedMessages,
     })
   } else{
-    req.flash("notice", "sorry unable to delete message")
+    req.flash("notice", "sorry unable to read message")
 
 
       const messageInfo = await messageModel.getMessageById(message_id)
