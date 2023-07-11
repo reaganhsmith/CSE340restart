@@ -54,13 +54,15 @@ validate.checkMessData = async (req, res, next) => {
 }
 
 validate.checkReplyData = async (req, res, next) => {
-    const{ message_to, message_from, message_subject, message_body} = req.bodyy
+    const{ message_to, message_from, message_subject, message_body} = req.body
     let errors = []
     errors = validationResult(req)
+
     if (!errors.isEmpty()) {
+        
 
         const message_id = parseInt(req.params.message_id)
-        console.log(message_id)
+
         let nav = await utilities.getNav()
 
         const account_id = res.locals.accountData.account_id
@@ -68,7 +70,7 @@ validate.checkReplyData = async (req, res, next) => {
         const messageData = await messageModel.getMessageById(message_id)
         const messageSubject = messageData.message_subject
         const messageBody = messageData.message_body
-        const replyPost = `/messages/reply/${messageData.message_id}`
+        const replyPost = `/messages/sendreply/${messageData.message_id}`
 
         const accountSelect = await utilities.selectAccount()
 
