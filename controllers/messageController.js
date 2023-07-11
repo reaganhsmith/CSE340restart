@@ -352,17 +352,12 @@ async function reply(req, res, next) {
   const account_id = res.locals.accountData.account_id
 
   const messageData = await messageModel.getMessageById(message_id)
+  const replyPost = `/messages/reply/${messageData.message_id}`
 
-  if (!messageData) {
-      req.flash('error', 'That message does not exist');
-      return res.status(400).render('messages/inbox', {
-        title: 'Inbox',
-        nav,
-        errors: null,
-      });
-    }
 
   const messageSubject = messageData.message_subject
+  const message_subject = " "
+  const message_body = " "
   const messageBody = messageData.message_body
 
   const accountSelect = await utilities.selectAccount()
@@ -371,13 +366,16 @@ async function reply(req, res, next) {
   const fromName = await messageModel.getFromFN(message_from)
 
       res.render("messages/reply", {
-        title: "Reply",
+        title: messageSubject,
         nav,
         errors: null,
         messageFrom: fromName.account_firstname,
         messageBody: messageBody,
         accountSelect,
         account_id: account_id,
+        message_subject,
+        message_body,
+        replyPost,
 
       })
     }

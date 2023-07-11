@@ -65,6 +65,14 @@ router.post("/",
 utilities.checkAllLogin,
  utilities.handleErrors(messageCont.inboxHome)) 
 
+
+ // Router post for sent message
+router.post("/reply/:message_id",
+utilities.checkAllLogin,
+messValidate.newMessageRules(),
+messValidate.checkReplyData,
+utilities.handleErrors(messageCont.sentMessage))
+
 // Export both routers
 module.exports = router;
 
