@@ -299,7 +299,7 @@ async function readMessage(req, res, next) {
   const messageTable = await utilities.buildInboxGrid(messageData)
 
   const messageInfo = await messageModel.getMessageById(message_id)
-console.log(messageInfo.message_read)
+
   if(messageResults){
 
     if(messageInfo.message_read == true){
