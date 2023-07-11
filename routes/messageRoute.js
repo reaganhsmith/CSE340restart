@@ -67,7 +67,7 @@ utilities.checkAllLogin,
 
 
  // Router post for sent message
-router.post("/reply/:message_id",
+router.post("/sendreply/:message_id",
 utilities.checkAllLogin,
 messValidate.newMessageRules(),
 messValidate.checkReplyData,

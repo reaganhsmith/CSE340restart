@@ -352,7 +352,7 @@ async function reply(req, res, next) {
   const account_id = res.locals.accountData.account_id
 
   const messageData = await messageModel.getMessageById(message_id)
-  const replyPost = `/messages/reply/${messageData.message_id}`
+  const replyPost = `/messages/sendreply/${messageData.message_id}`
 
 
   const messageSubject = messageData.message_subject
