@@ -51,7 +51,7 @@ async function newMessage(req, res, next) {
         errors: null,
         account_id: account_id,
         accountSelect,
-
+        message_body,
       })
   
     }

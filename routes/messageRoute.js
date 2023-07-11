@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router() 
 const utilities = require('../utilities/')
+const messValidate = require('../utilities/message-validation')
 
 const messageCont = require("../controllers/messageController")
 
@@ -23,6 +24,8 @@ utilities.checkAllLogin,
 // Router post for sent message
 router.post("/sent",
 utilities.checkAllLogin,
+messValidate.newMessageRules(),
+messValidate.checkMessData,
 utilities.handleErrors(messageCont.sentMessage))
 
 //Route for each message
