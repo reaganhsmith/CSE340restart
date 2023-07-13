@@ -224,7 +224,7 @@ Util.buildInboxGrid = async function(data){
 
       grid += '<tr>';
       grid += '<td>' + message.message_created.toLocaleString() + '</td>';
-      grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </td>';
+      grid += '<td> <a href="/messages/' + message.message_id + '" >' + message.message_subject + ' </a></td>';
 
        grid += '<td>' + message.account_firstname + '</td>';
       grid += '<td>' + message.message_read + '</td>';
