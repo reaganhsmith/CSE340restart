@@ -42,7 +42,8 @@ async function newMessage(req, res, next) {
   const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
   // const accountData = await accountModel.getAccountById(account_id)
-
+  const message_body = " "
+  const message_subject = " "
   const accountSelect = await utilities.selectAccount()
 
       res.render("messages/newMessage", {
@@ -51,6 +52,7 @@ async function newMessage(req, res, next) {
         errors: null,
         account_id: account_id,
         accountSelect,
+        message_subject,
         message_body,
       })
   
